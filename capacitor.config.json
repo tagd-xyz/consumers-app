@@ -1,0 +1,6 @@
+{
+  "appId": "com.tagd.consumers.app",
+  "appName": "app",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
