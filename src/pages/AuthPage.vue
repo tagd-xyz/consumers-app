@@ -11,24 +11,12 @@
 
 <script setup>
 import firebase from "firebase/compat/app";
-import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 import { ref, onMounted } from "vue";
-import { useAuthStore } from '../stores/auth';
+import { useAuthStore } from "../stores/auth";
+import { auth, authUI } from "boot/firebase";
 
 const store = useAuthStore();
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCsKvxjZAIy-f74HK7vscaTdVjjBj9utrQ",
-  authDomain: "tagd-fc027.firebaseapp.com",
-  projectId: "tagd-fc027",
-  storageBucket: "tagd-fc027.appspot.com",
-  messagingSenderId: "758413626037",
-  appId: "1:758413626037:web:32461658697e12aafd0cfc",
-  measurementId: "G-E0NX4GB2MY",
-};
-
-firebase.initializeApp(firebaseConfig);
 
 onMounted(() => {
   const config = {
@@ -40,20 +28,20 @@ onMounted(() => {
     callbacks: {
       signInSuccessWithAuthResult(authResult) {
         store.signIn(authResult.user);
-        // console.log(authResult.user);
-        // user.value = authResult.user.displayName;
-        // console.log(authResult);
-        // isSignedIn.value = true;
-        // console.log("Signed in by user " + user.value);
         return true;
       },
     },
   };
 
-  const ui =
-    firebaseui.auth.AuthUI.getInstance() ||
-    new firebaseui.auth.AuthUI(firebase.auth());
-
-  ui.start("#firebaseui-auth-container", config);
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      // user is logged in, redirect
+      store.signIn(user);
+      window.location.href = "/items";
+    } else {
+      // user is logged out, start FirebaseUI
+      authUI.start("#firebaseui-auth-container", config);
+    }
+  });
 });
 </script>

@@ -81,15 +81,18 @@
             />
           </q-avatar>
           <div class="text-weight-bold">{{ currentUser ?? 'undefined' }}</div>
-          <div>Sign out</div>
+          <q-btn
+            color="primary"
+            size="xs"
+            label="Sign out"
+            @click="onSignOutClicked"
+          />
         </div>
       </div>
     </q-drawer>
 
     <q-page-container>
-      <keep-alive>
-        <router-view />
-      </keep-alive>
+      <router-view />
     </q-page-container>
   </q-layout>
 </template>
@@ -97,7 +100,7 @@
 <script setup>
 import { computed, ref } from "vue";
 import { useAuthStore } from '../stores/auth';
-// import EssentialLink from "components/EssentialLink.vue";
+import { auth } from "boot/firebase";
 
 const store = useAuthStore();
 
@@ -108,6 +111,13 @@ const leftDrawerOpen = ref(false);
 const currentUser = computed(() => {
   return store.user.displayName;
 })
+
+function onSignOutClicked() {
+  auth.signOut().then(() => {
+    store.signOut();
+    window.location.href = '/auth';
+  });
+}
 
 function toggleLeftDrawer () {
   leftDrawerOpen.value = !leftDrawerOpen.value;
