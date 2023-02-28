@@ -3,7 +3,10 @@ import { defineStore } from 'pinia';
 export const useAuthStore = defineStore('auth', {
   persist: true,
   state: () => {
-    return { user: false };
+    return {
+      user: false,
+      token: false,
+    };
   },
   getters: {
     isSignedIn() {
@@ -16,6 +19,9 @@ export const useAuthStore = defineStore('auth', {
     },
     signOut(user) {
       this.user = false;
+    },
+    setToken(token) {
+      this.token = token;
     },
   },
 });

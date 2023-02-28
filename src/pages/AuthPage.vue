@@ -33,13 +33,17 @@ onMounted(() => {
     },
   };
 
-  auth.onAuthStateChanged((user) => {
+  auth.onAuthStateChanged(async (user) => {
     if (user) {
       // user is logged in, redirect
+      const token = await user.getIdToken();
       store.signIn(user);
+      store.setToken(token);
       window.location.href = "/items";
     } else {
       // user is logged out, start FirebaseUI
+      store.signOut();
+      store.setToken(false);
       authUI.start("#firebaseui-auth-container", config);
     }
   });
