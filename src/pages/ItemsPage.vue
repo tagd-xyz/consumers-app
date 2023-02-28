@@ -2,8 +2,10 @@
   <q-page class="flex flex-center"> Items </q-page>
 </template>
 
-<script>
-import { defineComponent } from "vue";
+<script setup>
+import { useAuthStore } from '../stores/auth';
 
-export default defineComponent({});
+const store = useAuthStore();
+
+// store.setUser("Juan Test");
 </script>

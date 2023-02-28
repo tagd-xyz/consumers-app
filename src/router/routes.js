@@ -3,19 +3,22 @@ const routes = [
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
+    meta: {
+      requiresAuth: true,
+    },
     children: [
-      { path: '', component: () => import('pages/ItemsPage.vue') },
-      { path: '/items', component: () => import('pages/ItemsPage.vue') },
-      { path: '/notifications', component: () => import('pages/NotificationsPage.vue') },
-      { path: '/reseller-verification', component: () => import('pages/ResellerVerificationPage.vue') },
-      { path: '/gift-tag', component: () => import('pages/GiftTagPage.vue') },
-      { path: '/account', component: () => import('pages/AccountPage.vue') },
+      // { path: '', component: () => import('pages/ItemsPage.vue') },
+      { name: 'items', path: 'items', component: () => import('pages/ItemsPage.vue') },
+      { name: 'notifications', path: 'notifications', component: () => import('pages/NotificationsPage.vue') },
+      { name: 'resellerVerification', path: 'reseller-verification', component: () => import('pages/ResellerVerificationPage.vue') },
+      { name: 'giftTag', path: 'gift-tag', component: () => import('pages/GiftTagPage.vue') },
+      { name: 'account', path: 'account', component: () => import('pages/AccountPage.vue') },
     ]
   }, {
     path: '/auth',
     component: () => import('layouts/AuthLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/AuthPage.vue') },
+      { name: 'signIn', path: '', component: () => import('pages/AuthPage.vue') },
     ]
   },
 

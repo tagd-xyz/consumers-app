@@ -9,12 +9,14 @@
   </q-page>
 </template>
 
-<script>
-import { defineComponent } from "vue";
+<script setup>
 import firebase from "firebase/compat/app";
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { useAuthStore } from '../stores/auth';
+
+const store = useAuthStore();
 
 const firebaseConfig = {
   apiKey: "AIzaSyCsKvxjZAIy-f74HK7vscaTdVjjBj9utrQ",
@@ -28,59 +30,30 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-export default defineComponent({
-  mounted() {
-    console.log("---------------");
-    const user = ref(null);
-    const isSignedIn = ref(false);
-
-    const config = {
-      signInOptions: [
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        // this.$fireModule.auth.GoogleAuthProvider.PROVIDER_ID,
-      ],
-      signInSuccessUrl: "/items",
-      callbacks: {
-        signInSuccessWithAuthResult(authResult) {
-          user.value = authResult.user.displayName;
-          console.log(authResult);
-          isSignedIn.value = true;
-          console.log("Signed in by user " + user.value);
-          return false;
-        },
+onMounted(() => {
+  const config = {
+    signInOptions: [
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      // this.$fireModule.auth.GoogleAuthProvider.PROVIDER_ID,
+    ],
+    signInSuccessUrl: "/items",
+    callbacks: {
+      signInSuccessWithAuthResult(authResult) {
+        store.signIn(authResult.user);
+        // console.log(authResult.user);
+        // user.value = authResult.user.displayName;
+        // console.log(authResult);
+        // isSignedIn.value = true;
+        // console.log("Signed in by user " + user.value);
+        return true;
       },
-    };
+    },
+  };
 
-    const ui =
-      firebaseui.auth.AuthUI.getInstance() ||
-      new firebaseui.auth.AuthUI(firebase.auth());
+  const ui =
+    firebaseui.auth.AuthUI.getInstance() ||
+    new firebaseui.auth.AuthUI(firebase.auth());
 
-    ui.start("#firebaseui-auth-container", config);
-
-    return {
-      user,
-      isSignedIn,
-    };
-  },
+  ui.start("#firebaseui-auth-container", config);
 });
 </script>
-
-<!-- https://github.com/macpatoOrigin/firebaseUI-Auth-vue2-quasar/blob/master/src/pages/auth/login.vue -->
-
-
-const ui =
-firebaseui.auth.AuthUI.getInstance() ||
-new firebaseui.auth.AuthUI(this.$fire.auth);
-
-const config = {
-signInOptions: [
-  this.$fireModule.auth.EmailAuthProvider.PROVIDER_ID,
-  // this.$fireModule.auth.GoogleAuthProvider.PROVIDER_ID,
-],
-signInSuccessUrl: '/items',
-callbacks: {
-  signInSuccessWithAuthResult() {
-    window.location = '/items';
-  },
-},
-};
