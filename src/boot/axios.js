@@ -1,6 +1,6 @@
 import { boot } from 'quasar/wrappers';
 import axios from 'axios';
-import { useAuthStore } from "../stores/auth";
+import { useAuthStore } from 'stores/auth';
 
 const store = useAuthStore();
 
@@ -12,7 +12,7 @@ const store = useAuthStore();
 // for each client)
 const api = axios.create({ baseURL: 'https://api.example.com' });
 
-export default boot(({ app }) => {
+export default boot(() => { /** { app } */
   api.interceptors.request.use(async req => {
     const { token } = store;
     req.headers.Authorization = `Bearer ${token}`;

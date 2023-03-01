@@ -1,12 +1,12 @@
 <template>
   <div>
-    <header-component />
+    <Header title="Notifications"/>
 
     <q-page-container> Notifications... </q-page-container>
   </div>
 </template>
 
 <script setup>
-import HeaderComponent from "./HeaderComponent.vue";
+import Header from './components/Header.vue';
 
 </script>

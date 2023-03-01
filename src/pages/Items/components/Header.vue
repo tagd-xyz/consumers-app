@@ -3,7 +3,7 @@
     <q-header class="bg-white text-black" height-hint="98">
       <q-toolbar>
         <q-toolbar-title>
-          <q-input outlined dense v-model="text" label="Search">
+          <q-input outlined dense v-model="searchText" label="Search">
             <template v-slot:prepend>
               <q-icon name="search" />
             </template>
@@ -13,8 +13,8 @@
         <q-btn dense flat round icon="filter_list" @click="toggleRightDrawer" />
       </q-toolbar>
       <q-btn-group class="q-mx-xl" spread rounded>
-        <q-btn no-caps rounded label="Inactive"/>
-        <q-btn no-caps rounded label="Active" text-color="primary"/>
+        <q-btn no-caps rounded label="Inactive" />
+        <q-btn no-caps rounded label="Active" text-color="primary" />
         <q-btn no-caps rounded label="Historic" />
       </q-btn-group>
     </q-header>
@@ -30,26 +30,13 @@
   </div>
 </template>
 
-<script>
-import { ref } from "vue";
-export default {
-  name: "HeaderComponent",
-  props: {
-    title: {
-      type: String,
-      required: true,
-    },
-  },
-  setup() {
-    const rightDrawerOpen = ref(false);
+<script setup>
+import { ref } from 'vue';
+const rightDrawerOpen = ref(false);
+const searchText = ref('');
 
-    return {
-      rightDrawerOpen,
-      toggleRightDrawer() {
-        rightDrawerOpen.value = !rightDrawerOpen.value;
-      },
-    };
-  },
+function toggleRightDrawer() {
+  rightDrawerOpen.value = !rightDrawerOpen.value;
 };
 </script>
 

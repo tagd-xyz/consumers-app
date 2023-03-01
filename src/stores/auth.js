@@ -18,7 +18,7 @@ export const useAuthStore = defineStore('auth', {
       console.log('setting user');
       this.user = user;
     },
-    signOut(user) {
+    signOut() {
       console.log('clear user');
       this.user = false;
     },

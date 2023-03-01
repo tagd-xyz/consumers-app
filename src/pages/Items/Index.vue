@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header-component />
+    <Header />
     <q-page-container>
       <div @click="renewToken">token</div>
     </q-page-container>
@@ -8,14 +8,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { useAuthStore } from "stores/auth";
-import { api } from "boot/axios";
-import HeaderComponent from "./HeaderComponent.vue";
+import { ref, onMounted } from 'vue';
+// import { useAuthStore } from 'stores/auth';
+import { api } from 'boot/axios';
+import Header from './components/Header.vue';
 
 const data = ref(null);
 
-const store = useAuthStore();
+// const store = useAuthStore();
 
 function renewToken() {
   console.log('will renew token');
@@ -23,7 +23,7 @@ function renewToken() {
 
 onMounted(() => {
   api
-    .get("/api/backend")
+    .get('/api/backend')
     .then((response) => {
       data.value = response.data;
     })

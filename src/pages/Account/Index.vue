@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header-component />
+    <Header title="Your account"/>
 
     <q-page-container class="q-pa-lg q-gutter-lg">
       <div class="row">
@@ -40,19 +40,19 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import { auth } from "boot/firebase";
-import { useAuthStore } from "stores/auth";
-import HeaderComponent from "./HeaderComponent.vue";
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { auth } from 'boot/firebase';
+// import { useAuthStore } from 'stores/auth';
+import Header from './components/Header.vue';
 
-const store = useAuthStore();
+// const store = useAuthStore();
 const router = useRouter();
 const showDialog = ref(false);
 
 function onSignOutClicked() {
   auth.signOut().then(() => {
-    router.push({ name: "signIn" });
+    router.push({ name: 'signIn' });
   });
 }
 </script>

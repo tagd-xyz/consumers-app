@@ -1,18 +1,18 @@
-import { boot } from 'quasar/wrappers'
-import firebase from "firebase/compat/app";
-import * as firebaseui from "firebaseui";
-import { useAuthStore } from "stores/auth";
+// import { boot } from 'quasar/wrappers'
+import firebase from 'firebase/compat/app';
+import * as firebaseui from 'firebaseui';
+import { useAuthStore } from 'stores/auth';
 const store = useAuthStore();
 
 // TODO: User .env
 const firebaseConfig = {
-  apiKey: "AIzaSyCsKvxjZAIy-f74HK7vscaTdVjjBj9utrQ",
-  authDomain: "tagd-fc027.firebaseapp.com",
-  projectId: "tagd-fc027",
-  storageBucket: "tagd-fc027.appspot.com",
-  messagingSenderId: "758413626037",
-  appId: "1:758413626037:web:32461658697e12aafd0cfc",
-  measurementId: "G-E0NX4GB2MY",
+  apiKey: 'AIzaSyCsKvxjZAIy-f74HK7vscaTdVjjBj9utrQ',
+  authDomain: 'tagd-fc027.firebaseapp.com',
+  projectId: 'tagd-fc027',
+  storageBucket: 'tagd-fc027.appspot.com',
+  messagingSenderId: '758413626037',
+  appId: '1:758413626037:web:32461658697e12aafd0cfc',
+  measurementId: 'G-E0NX4GB2MY',
 };
 
 if (!firebase.apps.length) {
