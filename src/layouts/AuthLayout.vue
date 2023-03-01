@@ -1,13 +1,10 @@
 <template>
-  <q-layout>
-    <q-page-container>
+  <q-layout view="hHh lpR fFf">
+    <q-page-container class="q-ma-xl">
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
 
-<script>
-import { defineComponent } from "vue";
-
-export default defineComponent({});
+<script setup>
 </script>

@@ -1,5 +1,6 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="flex flex-center row">
+    <logo-component />
     <div id="firebaseui-auth-container"></div>
     <!-- <img
       alt="Quasar logo"
@@ -13,10 +14,13 @@
 import firebase from "firebase/compat/app";
 import "firebaseui/dist/firebaseui.css";
 import { ref, onMounted } from "vue";
-import { useAuthStore } from "../stores/auth";
+import { useAuthStore } from "stores/auth";
 import { auth, authUI } from "boot/firebase";
+import { useRouter } from 'vue-router'
+import LogoComponent from "components/LogoComponent.vue";
 
 const store = useAuthStore();
+const router = useRouter();
 
 onMounted(() => {
   const config = {
@@ -36,14 +40,10 @@ onMounted(() => {
   auth.onAuthStateChanged(async (user) => {
     if (user) {
       // user is logged in, redirect
-      const token = await user.getIdToken();
-      store.signIn(user);
-      store.setToken(token);
-      window.location.href = "/items";
+      router.push({name: 'items'});
+
     } else {
       // user is logged out, start FirebaseUI
-      store.signOut();
-      store.setToken(false);
       authUI.start("#firebaseui-auth-container", config);
     }
   });

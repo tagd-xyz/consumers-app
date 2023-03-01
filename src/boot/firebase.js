@@ -1,6 +1,8 @@
 import { boot } from 'quasar/wrappers'
 import firebase from "firebase/compat/app";
 import * as firebaseui from "firebaseui";
+import { useAuthStore } from "stores/auth";
+const store = useAuthStore();
 
 // TODO: User .env
 const firebaseConfig = {
@@ -18,6 +20,20 @@ if (!firebase.apps.length) {
 }
 
 const auth = firebase.auth();
+
+auth.onAuthStateChanged(async (user) => {
+  if (user) {
+    // user is logged
+    const token = await user.getIdToken();
+    store.signIn(user);
+    store.setToken(token);
+
+  } else {
+    // user is logged out
+    store.signOut();
+    store.setToken(false);
+  }
+});
 
 const authUI = new firebaseui.auth.AuthUI(auth);
 

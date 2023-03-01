@@ -1,15 +1,25 @@
 <template>
-  <q-page class="flex flex-center"> Items </q-page>
+  <div>
+    <header-component />
+    <q-page-container>
+      <div @click="renewToken">token</div>
+    </q-page-container>
+  </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { useAuthStore } from "../stores/auth";
+import { ref, onMounted } from "vue";
+import { useAuthStore } from "stores/auth";
 import { api } from "boot/axios";
+import HeaderComponent from "./HeaderComponent.vue";
 
-const data = ref(null)
+const data = ref(null);
 
 const store = useAuthStore();
+
+function renewToken() {
+  console.log('will renew token');
+}
 
 onMounted(() => {
   api
