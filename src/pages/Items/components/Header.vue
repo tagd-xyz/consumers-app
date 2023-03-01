@@ -68,7 +68,7 @@
 import { ref } from 'vue';
 const rightDrawerOpen = ref(false);
 const searchText = ref('');
-const activeButton = ref(0);
+const activeButton = ref(2);
 
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
