@@ -1,6 +1,10 @@
 <template>
   <div>
-    <Header :is-loading="isLoading" @update="onHeaderUpdate" />
+    <Header
+      :is-loading="isLoading"
+      @update="onHeaderUpdate"
+      @search="onHeaderSearch"
+    />
     <q-page-container class="q-pa-md q-ma-md">
       <div v-if="isLoading" class="flex flex-center">
         <q-spinner color="primary" size="1.5rem" />
@@ -9,8 +13,9 @@
         There are no items
       </p>
       <div v-else>
+        <p class="text-caption">{{ listCount }}</p>
         <q-card
-          v-for="item in store.list"
+          v-for="item in list"
           :key="item.id"
           class="my-card"
           flat
@@ -40,37 +45,44 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useItemsStore } from 'stores/items';
-import { api } from 'boot/axios';
 import Header from './components/Header.vue';
 
-const isLoading = ref(true);
-
+const searchText = ref('');
 const store = useItemsStore();
+
+const isLoading = computed(() => {
+  return store.isLoading;
+});
+
+const listCount = computed(() => {
+  const count = store.list.length;
+  return 1 == count ? `${count} result` : `${count} results`;
+});
+
+const list = computed(() => {
+  const keyword = searchText.value.toLowerCase();
+  if ('' == keyword) {
+    return store.list;
+  } else {
+    return store.list.filter(
+      (item) =>
+        item.description.toLowerCase().includes(keyword) ||
+        item.retailer.toLowerCase().includes(keyword)
+    );
+  }
+});
 
 function onHeaderUpdate(button) {
   console.log(button);
 }
 
+function onHeaderSearch(text) {
+  searchText.value = text.trim();
+}
+
 onMounted(() => {
-  isLoading.value = true;
-  api
-    .get('/api/v1/items')
-    .then((response) => {
-      const list = response.data.data;
-      store.setList(list);
-    })
-    .catch(() => {
-      // $q.notify({
-      //   color: "negative",
-      //   position: "top",
-      //   message: "Loading failed",
-      //   icon: "report_problem",
-      // });
-    })
-    .finally(() => {
-      isLoading.value = false;
-    });
+  store.fetch();
 });
 </script>

@@ -65,7 +65,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { watch, ref } from 'vue';
 const rightDrawerOpen = ref(false);
 const searchText = ref('');
 const activeButton = ref(2);
@@ -78,7 +78,11 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['change']);
+const emit = defineEmits(['update', 'search']);
+
+watch(searchText, (currentValue) => {
+  emit('search', currentValue);
+});
 
 function toggleRightDrawer() {
   rightDrawerOpen.value = !rightDrawerOpen.value;
