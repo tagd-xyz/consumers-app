@@ -14,10 +14,11 @@
 </template>
 
 <script setup>
+// eslint-disable-next-line no-unused-vars
 const props = defineProps({
   variant: {
     type: String,
-    default: "light",
+    default: 'light',
   },
 });
 </script>

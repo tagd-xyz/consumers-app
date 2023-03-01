@@ -1,8 +1,13 @@
 <template>
   <div>
-    <Header />
-    <q-page-container>
-      <div @click="renewToken">token</div>
+    <Header :is-loading="isLoading" @update="onHeaderUpdate"/>
+    <q-page-container class="">
+      <div v-if="isLoading" class="flex flex-center q-pa-md">
+        <q-spinner
+        color="primary"
+        size="1.5rem"
+        />
+      </div>
     </q-page-container>
   </div>
 </template>
@@ -14,16 +19,18 @@ import { api } from 'boot/axios';
 import Header from './components/Header.vue';
 
 const data = ref(null);
+const isLoading = ref(true);
 
 // const store = useAuthStore();
 
-function renewToken() {
-  console.log('will renew token');
+function onHeaderUpdate (button) {
+  console.log(button);
 }
 
 onMounted(() => {
+  isLoading.value = true;
   api
-    .get('/api/backend')
+    .get('/api/v1/me')
     .then((response) => {
       data.value = response.data;
     })
@@ -34,6 +41,9 @@ onMounted(() => {
       //   message: "Loading failed",
       //   icon: "report_problem",
       // });
+    })
+    .finally(() => {
+      isLoading.value = false;
     });
 });
 </script>
