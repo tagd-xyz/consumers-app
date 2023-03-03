@@ -27,7 +27,6 @@ auth.onAuthStateChanged(async (user) => {
     const token = await user.getIdToken();
     store.signIn(user);
     store.setToken(token);
-
   } else {
     // user is logged out
     store.signOut();

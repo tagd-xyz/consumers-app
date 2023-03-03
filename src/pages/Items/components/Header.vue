@@ -31,24 +31,24 @@
           rounded
           label="Inactive"
           :disabled="isLoading"
-          :text-color="1 == activeButton ? 'primary' : ''"
-          @click="setActive(1)"
+          :text-color="Tabs.Inactive == activeTab ? 'primary' : ''"
+          @click="setActive(Tabs.Inactive)"
         />
         <q-btn
           no-caps
           rounded
           label="Active"
           :disabled="isLoading"
-          :text-color="2 == activeButton ? 'primary' : ''"
-          @click="setActive(2)"
+          :text-color="Tabs.Active == activeTab ? 'primary' : ''"
+          @click="setActive(Tabs.Active)"
         />
         <q-btn
           no-caps
           rounded
           label="Historic"
           :disabled="isLoading"
-          :text-color="3 == activeButton ? 'primary' : ''"
-          @click="setActive(3)"
+          :text-color="Tabs.Historic == activeTab ? 'primary' : ''"
+          @click="setActive(Tabs.Historic)"
         />
       </q-btn-group>
     </q-header>
@@ -66,9 +66,16 @@
 
 <script setup>
 import { watch, ref } from 'vue';
+
+const Tabs = {
+  Inactive: 1,
+  Active: 2,
+  Historic: 3,
+};
+
 const rightDrawerOpen = ref(false);
 const searchText = ref('');
-const activeButton = ref(2);
+const activeTab = ref(Tabs.Inactive);
 
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
@@ -89,7 +96,7 @@ function toggleRightDrawer() {
 }
 
 function setActive(button) {
-  activeButton.value = button;
+  activeTab.value = button;
   emit('update', button);
 }
 </script>

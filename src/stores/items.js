@@ -6,12 +6,14 @@ export const useItemsStore = defineStore('items', {
   state: () => {
     return {
       list: [],
-      isFetching: false,
+      is: {
+        fetching: false,
+      },
     };
   },
   getters: {
     isLoading() {
-      return this.isFetching;
+      return this.is.fetching;
     },
     isEmpty() {
       return 0 == this.list.length;
@@ -22,9 +24,9 @@ export const useItemsStore = defineStore('items', {
   },
   actions: {
     fetch() {
-      this.isFetching = true;
+      this.is.fetching = true;
       api
-        .get('/api/v1/items')
+        .get('items')
         .then((response) => {
           this.list = response.data.data;
         })
@@ -32,7 +34,7 @@ export const useItemsStore = defineStore('items', {
           this.list = [];
         })
         .finally(() => {
-          this.isFetching = false;
+          this.is.fetching = false;
         });
     },
   },
