@@ -6,6 +6,8 @@ module.exports = {
 
   parserOptions: {
     ecmaVersion: '2021', // Allows for the parsing of modern ECMAScript features
+    parser: '@babel/eslint-parser',
+    requireConfigFile: false,
   },
 
   env: {
@@ -28,18 +30,21 @@ module.exports = {
 
     // https://github.com/prettier/eslint-config-prettier#installation
     // usage with Prettier, provided by 'eslint-config-prettier'.
-    'prettier'
+    'prettier',
+
+    'eslint:recommended',
+    '@vue/eslint-config-prettier',
   ],
 
   plugins: [
     // https://eslint.vuejs.org/user-guide/#why-doesn-t-it-work-on-vue-files
     // required to lint *.vue files
     'vue',
-    
+
     // https://github.com/typescript-eslint/typescript-eslint/issues/389#issuecomment-509292674
     // Prettier has not been included as plugin to avoid performance impact
     // add it as an extension for your IDE
-    
+
   ],
 
   globals: {
@@ -57,10 +62,13 @@ module.exports = {
 
   // add your custom rules here
   rules: {
-    
+
     'prefer-promise-reject-errors': 'off',
 
     // allow debugger during development only
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+
+    'quotes': [2, 'single', { avoidEscape: true }],
+    'vue/multi-word-component-names': 'off',
   }
 }
