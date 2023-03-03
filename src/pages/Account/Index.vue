@@ -43,10 +43,8 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { auth } from 'boot/firebase';
-// import { useAuthStore } from 'stores/auth';
 import Header from './components/Header.vue';
 
-// const store = useAuthStore();
 const router = useRouter();
 const showDialog = ref(false);
 

@@ -23,13 +23,13 @@ export default {
 </script> -->
 
 <script setup>
-  // eslint-disable-next-line no-unused-vars
-  const props = defineProps({
-    title: {
-      type: String,
-      default: 'Title',
-    },
-  });
+// eslint-disable-next-line no-unused-vars
+const props = defineProps({
+  title: {
+    type: String,
+    default: 'Title',
+  },
+});
 </script>
 
 <style scoped>

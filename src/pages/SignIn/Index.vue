@@ -2,11 +2,6 @@
   <q-page class="flex flex-center row">
     <logo-component />
     <div id="firebaseui-auth-container"></div>
-    <!-- <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    > -->
   </q-page>
 </template>
 

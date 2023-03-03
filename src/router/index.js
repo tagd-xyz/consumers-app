@@ -17,7 +17,7 @@ import { useAuthStore } from '../stores/auth';
  * with the Router instance.
  */
 
-export default route(function (  /* { store, ssrContext } */) {
+export default route(function (/* { store, ssrContext } */) {
   // const createHistory = process.env.SERVER
   //   ? createMemoryHistory
   //   : (process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory)
@@ -33,15 +33,18 @@ export default route(function (  /* { store, ssrContext } */) {
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
     // history: createHistory(process.env.VUE_ROUTER_BASE)
-  })
+  });
 
   Router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth) && !store.isSignedIn) {
+    if (
+      to.matched.some((record) => record.meta.requiresAuth) &&
+      !store.isSignedIn
+    ) {
       next({ name: 'signIn', query: { next: to.fullPath } });
     } else {
       next();
     }
   });
 
-  return Router
-})
+  return Router;
+});
