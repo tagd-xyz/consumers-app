@@ -9,11 +9,12 @@
     <div v-else>
       <p class="text-caption">{{ listCount }}</p>
       <q-card
-        v-for="item in items"
-        :key="item.id"
+        v-for="tagd in tagds"
+        :key="tagd.id"
         class="my-card"
         flat
         bordered
+        @click="onTagdClicked(tagd)"
       >
         <q-card-section horizontal>
           <q-card-section class="col-5 flex flex-center">
@@ -23,10 +24,12 @@
             />
           </q-card-section>
           <q-card-section class="q-pt-xs">
-            <div class="text-caption text-grey">{{ item.description }}</div>
-            <div class="text-subtitle1">{{ item.retailer }}</div>
+            <div class="text-caption text-grey">
+              {{ tagd.item.description }}
+            </div>
+            <div class="text-subtitle1">{{ tagd.item.retailer }}</div>
             <div class="text-subtitle2">
-              {{ Object.values(item.properties).join(' / ') }}
+              {{ Object.values(tagd.item.properties).join(' / ') }}
             </div>
           </q-card-section>
         </q-card-section>
@@ -46,15 +49,21 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  items: {
+  tagds: {
     type: Array,
     // eslint-disable-next-line vue/require-valid-default-prop
     default: [],
   },
 });
 
+const emit = defineEmits(['tagdClick']);
+
 const listCount = computed(() => {
-  const count = props.items.length;
+  const count = props.tagds.length;
   return 1 == count ? `${count} result` : `${count} results`;
 });
+
+function onTagdClicked(item) {
+  emit('tagdClick', item);
+}
 </script>

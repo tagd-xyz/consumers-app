@@ -1,7 +1,7 @@
 const routes = [
   {
     path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/Main.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -27,8 +27,22 @@ const routes = [
     ],
   },
   {
+    path: '/item',
+    component: () => import('layouts/Single.vue'),
+    meta: {
+      requiresAuth: true,
+    },
+    children: [
+      {
+        name: 'item',
+        path: ':id',
+        component: () => import('src/pages/Item/Show.vue'),
+      },
+    ],
+  },
+  {
     path: '/auth',
-    component: () => import('layouts/AuthLayout.vue'),
+    component: () => import('layouts/Auth.vue'),
     children: [
       {
         name: 'signIn',

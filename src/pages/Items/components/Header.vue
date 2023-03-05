@@ -30,7 +30,7 @@
           no-caps
           rounded
           label="Inactive"
-          :disabled="isLoading"
+          :disabled="isLoading || 0 == inactiveCount"
           :text-color="Tabs.Inactive == activeTab ? 'primary' : ''"
           @click="setActive(Tabs.Inactive)"
         />
@@ -38,15 +38,19 @@
           no-caps
           rounded
           label="Active"
-          :disabled="isLoading"
+          :disabled="isLoading || 0 == activeCount"
           :text-color="Tabs.Active == activeTab ? 'primary' : ''"
           @click="setActive(Tabs.Active)"
-        />
+        >
+          <q-badge color="orange" floating transparent>
+            {{ activeCount }}
+          </q-badge>
+        </q-btn>
         <q-btn
           no-caps
           rounded
           label="Historic"
-          :disabled="isLoading"
+          :disabled="isLoading || 0 == historicCount"
           :text-color="Tabs.Historic == activeTab ? 'primary' : ''"
           @click="setActive(Tabs.Historic)"
         />
@@ -82,6 +86,18 @@ const props = defineProps({
   isLoading: {
     type: Boolean,
     default: false,
+  },
+  inactiveCount: {
+    type: Number,
+    default: null,
+  },
+  activeCount: {
+    type: Number,
+    default: null,
+  },
+  historicCount: {
+    type: Number,
+    default: null,
   },
 });
 

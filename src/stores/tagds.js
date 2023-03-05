@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { api } from 'boot/axios';
 
-export const useItemsStore = defineStore('items', {
+export const useTagdsStore = defineStore('tagds', {
   persist: true,
   state: () => {
     return {
@@ -10,22 +10,16 @@ export const useItemsStore = defineStore('items', {
       is: {
         fetchingAll: false,
         fetchingSingle: false,
+        activating: false,
       },
     };
   },
-  getters: {
-    isEmpty() {
-      return 0 == this.list.length;
-    },
-    getList() {
-      return this.list;
-    },
-  },
+  getters: {},
   actions: {
     fetchAll() {
       this.is.fetchingAll = true;
       api
-        .get('items')
+        .get('tagds')
         .then((response) => {
           this.list = response.data.data;
         })
@@ -40,7 +34,7 @@ export const useItemsStore = defineStore('items', {
       this.single = null;
       this.is.fetchingSingle = true;
       api
-        .get('items/' + id)
+        .get('tagds/' + id)
         .then((response) => {
           this.single = response.data.data;
         })
@@ -49,6 +43,16 @@ export const useItemsStore = defineStore('items', {
         })
         .finally(() => {
           this.is.fetchingSingle = false;
+        });
+    },
+    activate(id) {
+      this.is.activating = true;
+      api
+        .post('tagds/' + id + '/activate')
+        .then(() => {})
+        .catch(() => {})
+        .finally(() => {
+          this.is.activating = false;
         });
     },
   },

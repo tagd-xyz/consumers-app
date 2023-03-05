@@ -4,18 +4,33 @@
       :is-loading="isLoading"
       @update="onHeaderUpdate"
       @search="onHeaderSearch"
+      :inactive-count="listInactive.length"
+      :active-count="listActive.length"
+      :historic-count="listHistoric.length"
     />
     <q-tab-panels v-model="activeTab" animated>
       <q-tab-panel :name="Tabs.Inactive">
-        <List :is-loading="isLoading" :items="listInactive" />
+        <List
+          :is-loading="isLoading"
+          :tagds="listInactive"
+          @tagdClick="onTagdClicked"
+        />
       </q-tab-panel>
 
       <q-tab-panel :name="Tabs.Active">
-        <List :is-loading="isLoading" :items="listActive" />
+        <List
+          :is-loading="isLoading"
+          :tagds="listActive"
+          @tagdClick="onTagdClicked"
+        />
       </q-tab-panel>
 
       <q-tab-panel :name="Tabs.Historic">
-        <List :is-loading="isLoading" :items="listHistoric" />
+        <List
+          :is-loading="isLoading"
+          :tagds="listHistoric"
+          @tagdClick="onTagdClicked"
+        />
       </q-tab-panel>
     </q-tab-panels>
   </div>
@@ -23,7 +38,8 @@
 
 <script setup>
 import { computed, onMounted, ref } from 'vue';
-import { useItemsStore } from 'stores/items';
+import { useTagdsStore } from 'stores/tagds';
+import { useRouter } from 'vue-router';
 import Header from './components/Header.vue';
 import List from './components/List.vue';
 
@@ -38,14 +54,15 @@ const Status = {
   Active: 'active',
   Inactive: 'inactive',
   Transferred: 'transferred',
-}
+};
 
 const searchText = ref('');
 const activeTab = ref(Tabs.Inactive);
-const store = useItemsStore();
+const store = useTagdsStore();
+const router = useRouter();
 
 const isLoading = computed(() => {
-  return store.isLoading;
+  return store.is.fetchingAll;
 });
 
 const list = computed(() => {
@@ -54,9 +71,9 @@ const list = computed(() => {
     return store.list;
   } else {
     return store.list.filter(
-      (item) =>
-        item.description.toLowerCase().includes(keyword) ||
-        item.retailer.toLowerCase().includes(keyword)
+      (tagd) =>
+        tagd.item.description.toLowerCase().includes(keyword) ||
+        tagd.item.retailer.toLowerCase().includes(keyword)
     );
   }
 });
@@ -74,12 +91,8 @@ const listHistoric = computed(() => {
 });
 
 function filterItemsByTagdStatus(status) {
-  return list.value.filter((item) => {
-    return (
-      item.tagds.filter((tagd) => {
-        return tagd.status == status;
-      }).length > 0
-    );
+  return list.value.filter((tagd) => {
+    return tagd.status == status;
   });
 }
 
@@ -92,6 +105,17 @@ function onHeaderSearch(text) {
 }
 
 onMounted(() => {
-  store.fetch();
+  if (!store.is.fetchingAll) {
+    store.fetchAll();
+  }
 });
+
+function onTagdClicked(tagd) {
+  router.push({
+    name: 'item',
+    params: {
+      id: tagd.id,
+    },
+  });
+}
 </script>
