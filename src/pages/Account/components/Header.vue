@@ -2,7 +2,9 @@
   <div>
     <q-header class="bg-white text-black" height-hint="98">
       <q-toolbar>
-        <q-toolbar-title> {{ title }} </q-toolbar-title>
+        <q-toolbar-title class="absolute-center text-h6">
+          {{ title }}
+        </q-toolbar-title>
       </q-toolbar>
     </q-header>
   </div>

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Header title="Your account"/>
+    <Header title="Your account" />
 
-    <q-page-container class="q-pa-lg q-gutter-lg">
+    <q-page-container class="q-pa-lg">
       <div class="row">
         <div class="col">
           <q-btn

@@ -105,9 +105,7 @@ function onHeaderSearch(text) {
 }
 
 onMounted(() => {
-  if (!store.is.fetchingAll) {
-    store.fetchAll();
-  }
+  store.fetchAll();
 });
 
 function onTagdClicked(tagd) {

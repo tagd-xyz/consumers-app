@@ -6,18 +6,15 @@ export const useTagdsStore = defineStore('tagds', {
   state: () => {
     return {
       list: [],
-      single: null,
       is: {
-        fetchingAll: false,
-        fetchingSingle: false,
-        activating: false,
+        fetching: false,
       },
     };
   },
   getters: {},
   actions: {
     fetchAll() {
-      this.is.fetchingAll = true;
+      this.is.fetching = true;
       api
         .get('tagds')
         .then((response) => {
@@ -27,32 +24,7 @@ export const useTagdsStore = defineStore('tagds', {
           this.list = [];
         })
         .finally(() => {
-          this.is.fetchingAll = false;
-        });
-    },
-    fetch(id) {
-      this.single = null;
-      this.is.fetchingSingle = true;
-      api
-        .get('tagds/' + id)
-        .then((response) => {
-          this.single = response.data.data;
-        })
-        .catch(() => {
-          this.single = null;
-        })
-        .finally(() => {
-          this.is.fetchingSingle = false;
-        });
-    },
-    activate(id) {
-      this.is.activating = true;
-      api
-        .post('tagds/' + id + '/activate')
-        .then(() => {})
-        .catch(() => {})
-        .finally(() => {
-          this.is.activating = false;
+          this.is.fetching = false;
         });
     },
   },

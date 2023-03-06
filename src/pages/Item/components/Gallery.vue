@@ -6,7 +6,7 @@
       transition-next="slide-left"
       animated
       control-color="primary"
-      class="rounded-borders"
+      class="rounded-borders items-gallery"
     >
       <q-carousel-slide name="1" class="column no-wrap flex-center">
         <img src="https://picsum.photos/id/326/640/480" />
@@ -41,3 +41,9 @@ import { ref } from 'vue';
 
 const slide = ref('1');
 </script>
+
+<style scoped>
+.items-gallery {
+  max-height: 15rem;
+}
+</style>
