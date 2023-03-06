@@ -2,22 +2,29 @@
   <div>
     <q-header class="bg-white text-black" height-hint="98">
       <q-toolbar>
-        <q-toolbar-title> {{ title }} </q-toolbar-title>
-
-        <q-btn no-caps outline dense label="Clear"/>
+        <q-toolbar-title class="absolute-center text-h6">
+          {{ title }}
+        </q-toolbar-title>
+        <q-btn
+          no-caps
+          outline
+          dense
+          label="Clear"
+          class="absolute-right q-ma-sm"
+        />
       </q-toolbar>
     </q-header>
   </div>
 </template>
 
 <script setup>
-  // eslint-disable-next-line no-unused-vars
-  const props = defineProps({
-    title: {
-      type: String,
-      default: 'Title',
-    },
-  });
+// eslint-disable-next-line no-unused-vars
+const props = defineProps({
+  title: {
+    type: String,
+    default: 'Title',
+  },
+});
 </script>
 
 <style scoped>
