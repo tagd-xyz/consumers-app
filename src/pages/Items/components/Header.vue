@@ -42,7 +42,7 @@
           :text-color="Tabs.Active == activeTab ? 'primary' : ''"
           @click="setActive(Tabs.Active)"
         >
-          <q-badge color="orange" floating transparent>
+          <q-badge color="orange" floating transparent v-if="activeCount > 0">
             {{ activeCount }}
           </q-badge>
         </q-btn>
