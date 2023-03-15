@@ -11,7 +11,7 @@ services:
     container_name: tagd-consumers-app
     hostname: tagd-consumers-app
     ports:
-      - 3103:9000
+      - 3103:3103
     restart: always
     volumes:
       - ~/.ssh:/home/node/.ssh

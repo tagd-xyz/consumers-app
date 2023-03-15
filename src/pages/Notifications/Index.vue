@@ -16,7 +16,7 @@
 <script setup>
 import Header from './components/Header.vue';
 import Notification from './components/Notification.vue';
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 import { useNotificationsStore } from 'stores/notifications';
 
 const store = useNotificationsStore();
