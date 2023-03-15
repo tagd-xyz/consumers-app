@@ -1,9 +1,15 @@
 <template>
   <div>
-    <SellEnable v-if="showEnable" :tagd="tagd" />
-    <SellEnabled v-if="showEnabled" :tagd="tagd" />
-    <SellTransfer v-if="showEnabled" :tagd="tagd" />
-    <SellAuctions v-if="false" :tagd="tagd" />
+    <div v-if="isActive">
+      <SellEnable v-if="showEnable" :tagd="tagd" />
+      <SellEnabled v-if="showEnabled" :tagd="tagd" />
+      <SellTransfer v-if="showEnabled" :tagd="tagd" />
+      <SellAuctions v-if="false" :tagd="tagd" />
+    </div>
+    <div v-else>
+      <p class="text-h6 no-margin">This item is not available to sell</p>
+      <p></p>
+    </div>
   </div>
 </template>
 
@@ -20,6 +26,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+});
+
+const isActive = computed(() => {
+  return 'active' == props.tagd.status;
 });
 
 const showEnable = computed(() => {

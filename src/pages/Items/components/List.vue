@@ -27,7 +27,12 @@
             <div class="text-caption text-grey">
               {{ tagd.item.description }}
             </div>
-            <div class="text-subtitle1">{{ tagd.item.retailer }}</div>
+            <div class="text-subtitle1">
+              {{ tagd.item.retailer }}
+              <q-badge outline color="primary">
+                {{ tagd.status }}
+              </q-badge>
+            </div>
             <div class="text-subtitle2">
               {{ Object.values(tagd.item.properties).join(' / ') }}
             </div>

@@ -2,7 +2,20 @@
   <div>
     <Header title="Your account" />
 
-    <q-page-container class="q-pa-lg">
+    <q-page-container class="q-ma-lg">
+      <div v-if="store.data?.actors">
+        <div class="row">
+          <div class="col text-grey text-h6">Display Name</div>
+          <div class="col text-h6">{{ store.data.actors[0].name }}</div>
+        </div>
+        <div class="row">
+          <div class="col text-grey text-h6">Email</div>
+          <div class="col text-h6">{{ store.data.email }}</div>
+        </div>
+      </div>
+
+      <q-separator class="q-my-lg" color="grey" />
+
       <div class="row">
         <div class="col">
           <q-btn
@@ -40,17 +53,23 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { auth } from 'boot/firebase';
+import { useMeStore } from 'stores/me';
 import Header from './components/Header.vue';
 
 const router = useRouter();
 const showDialog = ref(false);
+const store = useMeStore();
 
 function onSignOutClicked() {
   auth.signOut().then(() => {
     router.push({ name: 'signIn' });
   });
 }
+
+onMounted(() => {
+  store.fetch();
+});
 </script>

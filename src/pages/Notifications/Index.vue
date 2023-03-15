@@ -8,6 +8,7 @@
         :notification="notification"
       >
       </Notification>
+      <q-inner-loading :showing="store.is.fetching" />
     </q-page-container>
   </div>
 </template>
@@ -15,32 +16,12 @@
 <script setup>
 import Header from './components/Header.vue';
 import Notification from './components/Notification.vue';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
+import { useNotificationsStore } from 'stores/notifications';
+
+const store = useNotificationsStore();
 
 const list = computed(() => {
-  return [
-    {
-      id: '1',
-      title: 'You have received a new tag!',
-      tagd: {
-        slug: 'ads-das-das-asa',
-        item: {
-          name: 'Small Classic Handbag',
-          retailer: 'Retailer name',
-        },
-      },
-    },
-    {
-      id: '2',
-      title: 'You have received a new tag!',
-      tagd: {
-        slug: 'ads-das-das-asa',
-        item: {
-          name: 'Small Classic Handbag',
-          retailer: 'Retailer name',
-        },
-      },
-    },
-  ];
+  return store.list;
 });
 </script>

@@ -33,7 +33,11 @@
           :disabled="isLoading || 0 == inactiveCount"
           :text-color="Tabs.Inactive == activeTab ? 'primary' : ''"
           @click="setActive(Tabs.Inactive)"
-        />
+        >
+          <q-badge color="orange" floating transparent v-if="inactiveCount > 0">
+            {{ inactiveCount }}
+          </q-badge>
+        </q-btn>
         <q-btn
           no-caps
           rounded
@@ -53,7 +57,11 @@
           :disabled="isLoading || 0 == historicCount"
           :text-color="Tabs.Historic == activeTab ? 'primary' : ''"
           @click="setActive(Tabs.Historic)"
-        />
+        >
+          <q-badge color="orange" floating transparent v-if="historicCount > 0">
+            {{ historicCount }}
+          </q-badge>
+        </q-btn>
       </q-btn-group>
     </q-header>
     <q-drawer

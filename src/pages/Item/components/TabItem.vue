@@ -2,6 +2,9 @@
   <div>
     <p class="text-h6">
       {{ tagd.item.name }}
+      <q-badge outline color="primary">
+        {{ tagd.status }}
+      </q-badge>
     </p>
     <p>
       <span class="text-grey"> Item Code </span>
