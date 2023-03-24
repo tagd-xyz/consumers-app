@@ -1,10 +1,13 @@
 <template>
   <div>
     <div v-if="isActive">
-      <SellEnable v-if="showEnable" :tagd="tagd" />
-      <SellEnabled v-if="showEnabled" :tagd="tagd" />
-      <SellTransfer v-if="showEnabled" :tagd="tagd" />
-      <SellAuctions v-if="false" :tagd="tagd" />
+      <SellEnable v-if="!isAvailableForResale" :tagd="tagd" />
+      <SellEnabled v-if="isAvailableForResale && !hasAuctions" :tagd="tagd" />
+      <SellTransfer v-if="isAvailableForResale && !hasAuctions" :tagd="tagd" />
+      <SellAuctions
+        v-if="isAvailableForResale && hasAuctions"
+        :auctions="tagd.auctions"
+      />
     </div>
     <div v-else>
       <p class="text-h6 no-margin">This item is not available to sell</p>
@@ -32,11 +35,11 @@ const isActive = computed(() => {
   return 'active' == props.tagd.status;
 });
 
-const showEnable = computed(() => {
-  return !props.tagd.isAvailableForResale;
+const isAvailableForResale = computed(() => {
+  return props.tagd.isAvailableForResale;
 });
 
-const showEnabled = computed(() => {
-  return props.tagd.isAvailableForResale;
+const hasAuctions = computed(() => {
+  return props.tagd.auctions?.length;
 });
 </script>
