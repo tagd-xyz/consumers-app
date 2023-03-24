@@ -11,13 +11,8 @@ export const useNotificationsStore = defineStore('notifications', {
       },
     };
   },
-  getters: {
-    // isSignedIn() {
-    //   return false !== this.user;
-    // },
-  },
   actions: {
-    fetch() {
+    fetchAll() {
       return new Promise((resolve, reject) => {
         this.is.fetching = true;
         api

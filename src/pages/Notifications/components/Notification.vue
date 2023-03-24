@@ -2,19 +2,19 @@
   <q-card flat>
     <q-card-section>
       <p class="text-subtitle2 no-margin">
-        {{ notification.data?.title }}
+        {{ notification?.data?.title }}
       </p>
       <p class="text-h6 q-my-sm">
-        notification.tagd.item.name
+        {{ notification?.data?.tagd?.item?.name }}
       </p>
       <p class="text-subtitle2 no-margin">
         <span class="text-grey">Tag </span>
-        {{ notification.data?.tagd?.slug }}
+        {{ notification?.data?.tagd?.slug }}
       </p>
       <p class="text-subtitle2 no-margin">
         <span class="text-grey">from </span>
         <span class="text-primary">
-          notification.tagd.item.retailer
+          {{ notification?.data?.tagd?.item?.retailer?.name }}
         </span>
       </p>
     </q-card-section>

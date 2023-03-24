@@ -72,7 +72,6 @@ const tagdId = computed(() => {
 // }
 
 function onBackClicked() {
-  console.log(2);
   router.go(-1);
 }
 
