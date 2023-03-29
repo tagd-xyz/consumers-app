@@ -22,14 +22,14 @@ public class MainActivity extends BridgeActivity {
       // Ex: add(TotallyAwesomePlugin.class);
     }});
 
-    if (BuildConfig.DEBUG) {
-      EnableHttpsSelfSigned.enable(this.bridge);
-    }
+    // if (BuildConfig.DEBUG) {
+    //   EnableHttpsSelfSigned.enable(this.bridge);
+    // }
 
     // App Center
     AppCenter.start(
       getApplication(),
-      "e013bfad-aaa8-4a57-8509-7e7d91becac1",
+      "e013bfad-aaa8-4a57-8509-7e7d91becac1", //TODO: Do not hardcode
       Analytics.class,
       Crashes.class
     );
