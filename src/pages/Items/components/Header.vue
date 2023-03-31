@@ -71,14 +71,14 @@
       behavior="mobile"
       bordered
     >
-      <!-- drawer content -->
+      <items-filter-component />
     </q-drawer>
   </div>
 </template>
 
 <script setup>
 import { watch, ref } from 'vue';
-
+import ItemsFilterComponent from 'src/components/ItemsFilterComponent.vue';
 const Tabs = {
   Inactive: 1,
   Active: 2,

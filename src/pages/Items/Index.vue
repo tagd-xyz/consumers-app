@@ -39,6 +39,7 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue';
 import { useTagdsStore } from 'stores/tagds';
+import { useUiStore } from 'stores/ui';
 import { useRouter } from 'vue-router';
 import Header from './components/Header.vue';
 import List from './components/List.vue';
@@ -59,6 +60,7 @@ const Status = {
 const searchText = ref('');
 const activeTab = ref(Tabs.Inactive);
 const store = useTagdsStore();
+const uiStore = useUiStore();
 const router = useRouter();
 
 const isLoading = computed(() => {
@@ -91,8 +93,48 @@ const listHistoric = computed(() => {
 });
 
 function filterItemsByTagdStatus(status) {
-  return list.value.filter((tagd) => {
-    return tagd.status == status;
+  return sortItems(
+    filterItemsByFilters(
+      list.value.filter((tagd) => {
+        return tagd.status == status;
+      })
+    )
+  );
+}
+
+function sortItems(items) {
+  return items.sort(function (a, b) {
+    switch (uiStore.filtering.order) {
+      case uiStore.filteringOrderOptions().tag:
+        return a.slug - b.slug;
+
+      case uiStore.filteringOrderOptions().retailer:
+        return a.item.retailer - b.item.retailer;
+
+      case uiStore.filteringOrderOptions().purchaseDate:
+      default:
+        return a.createdAt - b.createdAt;
+    }
+  });
+
+  // return items;
+}
+
+function filterItemsByFilters(items) {
+  const types = uiStore.filtering.type;
+  const retailers = uiStore.filtering.retailer;
+  const byAvailable = uiStore.filtering.available;
+  // const byListed = uiStore.filtering.listed;
+
+  return items.filter(function (item) {
+    const isAvailable = item.isAvailableForResale && byAvailable;
+    const isListed = true; // item.isAvailableForResale && byListed; (return props.tagd.auctions?.length;)
+    return (
+      types.includes(item.item.type) &&
+      retailers.includes(item.item.retailer) &&
+      isAvailable &&
+      isListed
+    );
   });
 }
 
@@ -104,8 +146,14 @@ function onHeaderSearch(text) {
   searchText.value = text.trim();
 }
 
+function initActiveTab() {
+  activeTab.value = Tabs.Active;
+}
+
 onMounted(() => {
-  store.fetchAll();
+  store.fetchAll().then(() => {
+    initActiveTab();
+  });
 });
 
 function onTagdClicked(tagd) {

@@ -34,30 +34,3 @@ export default {};
   text-transform: none !important;
 } */
 </style>
-
-<!-- <script setup>
-import { computed, ref } from "vue";
-import { useAuthStore } from "../stores/auth";
-import { auth } from "boot/firebase";
-
-const store = useAuthStore();
-
-console.log("PINIA USER", store.user);
-
-const leftDrawerOpen = ref(false);
-
-const currentUser = computed(() => {
-  return store.user.displayName;
-});
-
-function onSignOutClicked() {
-  auth.signOut().then(() => {
-    store.signOut();
-    window.location.href = "/auth";
-  });
-}
-
-function toggleLeftDrawer() {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
-}
-</script> -->

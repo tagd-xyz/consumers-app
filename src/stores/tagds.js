@@ -11,21 +11,35 @@ export const useTagdsStore = defineStore('tagds', {
       },
     };
   },
-  getters: {},
+  getters: {
+    retailers() {
+      return [
+        ...new Set(
+          this.list.map((tagd) => {
+            return tagd.item.retailer;
+          })
+        ),
+      ];
+    },
+  },
   actions: {
     fetchAll() {
-      this.is.fetching = true;
-      api
-        .get('tagds')
-        .then((response) => {
-          this.list = response.data.data;
-        })
-        .catch(() => {
-          this.list = [];
-        })
-        .finally(() => {
-          this.is.fetching = false;
-        });
+      return new Promise((resolve, reject) => {
+        this.is.fetching = true;
+        api
+          .get('tagds')
+          .then((response) => {
+            this.list = response.data.data;
+            resolve(response);
+          })
+          .catch((error) => {
+            this.list = [];
+            reject(error);
+          })
+          .finally(() => {
+            this.is.fetching = false;
+          });
+      });
     },
   },
 });
