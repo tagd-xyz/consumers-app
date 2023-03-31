@@ -34,9 +34,9 @@
           :text-color="Tabs.Inactive == activeTab ? 'primary' : ''"
           @click="setActive(Tabs.Inactive)"
         >
-          <q-badge color="orange" floating transparent v-if="inactiveCount > 0">
+          <!-- <q-badge color="orange" floating transparent v-if="inactiveCount > 0">
             {{ inactiveCount }}
-          </q-badge>
+          </q-badge> -->
         </q-btn>
         <q-btn
           no-caps
@@ -46,9 +46,9 @@
           :text-color="Tabs.Active == activeTab ? 'primary' : ''"
           @click="setActive(Tabs.Active)"
         >
-          <q-badge color="orange" floating transparent v-if="activeCount > 0">
+          <!-- <q-badge color="orange" floating transparent v-if="activeCount > 0">
             {{ activeCount }}
-          </q-badge>
+          </q-badge> -->
         </q-btn>
         <q-btn
           no-caps
@@ -58,9 +58,9 @@
           :text-color="Tabs.Historic == activeTab ? 'primary' : ''"
           @click="setActive(Tabs.Historic)"
         >
-          <q-badge color="orange" floating transparent v-if="historicCount > 0">
+          <!-- <q-badge color="orange" floating transparent v-if="historicCount > 0">
             {{ historicCount }}
-          </q-badge>
+          </q-badge> -->
         </q-btn>
       </q-btn-group>
     </q-header>
