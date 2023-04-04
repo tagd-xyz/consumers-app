@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-// import { api } from 'boot/axios';
 
 const filteringOrderOptions = {
   purchaseDate: 'Purchase Date',
@@ -13,50 +12,71 @@ const filteringTypeOptions = {
   sneakers: 'Sneakers',
 };
 
+const filteringResaleOptions = {
+  all: null,
+  yes: true,
+  no: false,
+};
+
 export const useUiStore = defineStore('ui', {
   persist: true,
   state: () => {
     return {
       filtering: {
-        order: filteringOrderOptions.purchaseDate,
-        type: [filteringTypeOptions.fashion, filteringTypeOptions.sneakers],
-        retailer: null,
-        retailerOptions: [],
-        available: true,
-        listed: true,
+        order: {
+          options: filteringOrderOptions,
+          selected: filteringOrderOptions.purchaseDate,
+        },
+        type: {
+          options: filteringTypeOptions,
+          selected: [
+            filteringTypeOptions.fashion,
+            filteringTypeOptions.sneakers,
+          ],
+        },
+        retailer: {
+          options: [],
+          selected: null,
+        },
+        brand: {
+          options: [],
+          selected: null,
+        },
+        resale: {
+          options: filteringResaleOptions,
+          available: filteringResaleOptions.all,
+          listed: filteringResaleOptions.all,
+        },
       },
     };
   },
-  getters: {
-    filteringOrderOptions() {
-      return filteringOrderOptions;
-    },
-    filteringTypeOptions() {
-      return filteringTypeOptions;
-    },
-    filteringRetailerOptions() {
-      return this.filtering.retailerOptions;
-    },
-  },
+  getters: {},
   actions: {
     setFilteringOrder(order) {
-      this.filtering.order = order;
+      this.filtering.order.selected = order;
     },
     setFilteringType(type) {
-      this.filtering.type = type;
+      this.filtering.type.selected = type;
     },
     setFilteringRetailer(retailer) {
-      this.filtering.retailer = retailer;
+      this.filtering.retailer.selected = retailer;
     },
-    setFilteringAvailable(available) {
-      this.filtering.available = available;
+    setFilteringBrand(brand) {
+      this.filtering.brand.selected = brand;
     },
-    setFilteringListed(listed) {
-      this.filtering.listed = listed;
+    setFilteringResaleAvailable(available) {
+      this.filtering.resale.available = available;
     },
-    setFilteringRetailersOptions(list) {
-      this.filtering.retailerOptions = list;
-      this.filtering.retailer = list;
+    setFilteringResaleListed(listed) {
+      this.filtering.resale.listed = listed;
+    },
+    setFilteringRetailerOptions(list) {
+      this.filtering.retailer.options = list;
+      this.filtering.retailer.selected = list;
+    },
+    setFilteringBrandOptions(list) {
+      this.filtering.brand.options = list;
+      this.filtering.brand.selected = list;
     },
   },
 });

@@ -21,6 +21,15 @@ export const useTagdsStore = defineStore('tagds', {
         ),
       ];
     },
+    brands() {
+      return [
+        ...new Set(
+          this.list.map((tagd) => {
+            return tagd.item.properties?.brand;
+          })
+        ),
+      ];
+    },
   },
   actions: {
     fetchAll() {

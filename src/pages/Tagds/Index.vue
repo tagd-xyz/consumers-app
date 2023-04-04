@@ -58,21 +58,21 @@ const Status = {
 };
 
 const searchText = ref('');
-const activeTab = ref(Tabs.Inactive);
-const store = useTagdsStore();
+const activeTab = ref(Tabs.Active);
+const tagdsStore = useTagdsStore();
 const uiStore = useUiStore();
 const router = useRouter();
 
 const isLoading = computed(() => {
-  return store.is.fetchingAll;
+  return tagdsStore.is.fetchingAll;
 });
 
 const list = computed(() => {
   const keyword = searchText.value.toLowerCase();
   if ('' == keyword) {
-    return store.list;
+    return tagdsStore.list;
   } else {
-    return store.list.filter(
+    return tagdsStore.list.filter(
       (tagd) =>
         tagd.item.description.toLowerCase().includes(keyword) ||
         tagd.item.retailer.toLowerCase().includes(keyword)
@@ -93,47 +93,54 @@ const listHistoric = computed(() => {
 });
 
 function filterItemsByTagdStatus(status) {
-  return sortItems(
-    filterItemsByFilters(
-      list.value.filter((tagd) => {
-        return tagd.status == status;
-      })
-    )
-  );
+  const listByStatus = list.value.filter((tagd) => {
+    return tagd.status == status;
+  });
+
+  const listFiltered = filterItemsByFilters(listByStatus);
+
+  return sortItems(listFiltered);
 }
 
 function sortItems(items) {
   return items.sort(function (a, b) {
-    switch (uiStore.filtering.order) {
-      case uiStore.filteringOrderOptions().tag:
+    switch (uiStore.filtering.order.selected) {
+      case uiStore.filtering.order.options.tag:
         return a.slug - b.slug;
 
-      case uiStore.filteringOrderOptions().retailer:
+      case uiStore.filtering.order.options.retailer:
         return a.item.retailer - b.item.retailer;
 
-      case uiStore.filteringOrderOptions().purchaseDate:
+      case uiStore.filtering.order.options.purchaseDate:
       default:
         return a.createdAt - b.createdAt;
     }
   });
-
-  // return items;
 }
 
 function filterItemsByFilters(items) {
-  const types = uiStore.filtering.type;
-  const retailers = uiStore.filtering.retailer;
-  const byAvailable = uiStore.filtering.available;
-  // const byListed = uiStore.filtering.listed;
+  const types = uiStore.filtering.type.selected;
+  const retailers = uiStore.filtering.retailer.selected;
+  const availableFilter = uiStore.filtering.resale.available;
+  const listedFilter = uiStore.filtering.resale.listed;
 
   return items.filter(function (item) {
-    const isAvailable = item.isAvailableForResale && byAvailable;
-    const isListed = true; // item.isAvailableForResale && byListed; (return props.tagd.auctions?.length;)
+    const passAvailableFilter =
+      null == availableFilter ||
+      (availableFilter && item.isAvailableForResale) ||
+      (!availableFilter && !item.isAvailableForResale);
+
+    const isListed = false; //item.tagd.auctions?.length;
+    const passListedFilter =
+      null == listedFilter ||
+      (listedFilter && isListed) ||
+      (!listedFilter && !isListed);
+
     return (
-      types.includes(item.item.type) &&
-      retailers.includes(item.item.retailer) &&
-      isAvailable &&
-      isListed
+      types?.includes(item.item.type) &&
+      retailers?.includes(item.item.retailer) &&
+      passAvailableFilter &&
+      passListedFilter
     );
   });
 }
@@ -146,19 +153,21 @@ function onHeaderSearch(text) {
   searchText.value = text.trim();
 }
 
-function initActiveTab() {
-  activeTab.value = Tabs.Active;
-}
+// function initActiveTab() {
+//   console.log('initActiveTab');
+//   activeTab.value = Tabs.Active;
+//   console.log(activeTab.value);
+// }
 
 onMounted(() => {
-  store.fetchAll().then(() => {
-    initActiveTab();
+  tagdsStore.fetchAll().then(() => {
+    // initActiveTab();
   });
 });
 
 function onTagdClicked(tagd) {
   router.push({
-    name: 'item',
+    name: 'tagd',
     params: {
       id: tagd.id,
     },
