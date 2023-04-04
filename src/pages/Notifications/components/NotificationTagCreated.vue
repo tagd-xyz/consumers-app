@@ -40,7 +40,7 @@ const props = defineProps({
 
 function onClick() {
   router.push({
-    name: 'item',
+    name: 'tagd',
     params: {
       id: props.notification.data.tagd.id,
     },

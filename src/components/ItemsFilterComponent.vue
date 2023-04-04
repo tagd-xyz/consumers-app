@@ -11,28 +11,42 @@
       v-model="type"
       :options="typeOptions"
       multiple
-      label="Category"
+      label="Filter by Category"
       @update:model-value="onTypeChange()"
     />
     <q-select
       v-model="retailer"
       :options="retailerOptions"
       multiple
-      label="Retailer"
+      label="Filter by Retailer"
       @update:model-value="onRetailerChange()"
     />
-
+    <q-select
+      v-model="brand"
+      :options="brandOptions"
+      multiple
+      label="Filter by Brand"
+      @update:model-value="onBrandChange()"
+    />
     <q-separator class="q-my-lg" />
 
-    <q-checkbox
-      v-model="currentlyListed"
-      label="Currently listed"
-      @update:model-value="onListedChange()"
-    />
-    <q-checkbox
+    <div class="text-subtitle2">Available for resale</div>
+    <q-option-group
       v-model="currentlyAvailable"
-      label="Currently available"
+      :options="resaleOptions"
       @update:model-value="onAvailableChange()"
+      inline
+      dense
+    />
+
+    <div class="text-subtitle2 q-mt-md disabled">Listed for resale (wip)</div>
+    <q-option-group
+      v-model="currentlyListed"
+      :options="resaleOptions"
+      @update:model-value="onListedChange()"
+      inline
+      dense
+      disable
     />
 
     <!-- <q-separator class="q-my-lg" />
@@ -43,46 +57,63 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useTagdsStore } from 'stores/tagds';
 import { useUiStore } from 'stores/ui';
 
-const tagdStore = useTagdsStore();
+const tagdsStore = useTagdsStore();
 const uiStore = useUiStore();
 
-// eslint-disable-next-line no-unused-vars
-// const props = defineProps({
-//   retailers: {
-//     type: Array,
-//     required: true,
-//   },
-// });
-
 const orderOptions = computed(() => {
-  return Object.keys(uiStore.filteringOrderOptions).map(function (key) {
-    return uiStore.filteringOrderOptions[key];
+  const options = uiStore.filtering.order.options;
+  return Object.keys(options).map(function (key) {
+    return options[key];
   });
 });
 
 const typeOptions = computed(() => {
-  return Object.keys(uiStore.filteringTypeOptions).map(function (key) {
-    return uiStore.filteringTypeOptions[key];
+  const options = uiStore.filtering.type.options;
+  return Object.keys(options).map(function (key) {
+    return options[key];
+  });
+});
+
+const resaleOptions = computed(() => {
+  const options = uiStore.filtering.resale.options;
+  return Object.keys(options).map(function (key) {
+    return {
+      label: key,
+      value: options[key],
+    };
   });
 });
 
 const retailerOptions = computed(() => {
-  return uiStore.filteringRetailerOptions;
+  return uiStore.filtering.retailer.options;
 });
 
-const retailers = computed(() => {
-  return tagdStore.retailers;
+const retailersAvailable = computed(() => {
+  return tagdsStore.retailers;
 });
 
-const order = ref(uiStore.filtering.order);
-const type = ref(uiStore.filtering.type);
-const retailer = ref(null);
-const currentlyListed = ref(true);
-const currentlyAvailable = ref(true);
+const brandOptions = computed(() => {
+  return uiStore.filtering.brand.options;
+});
+
+const brandsAvailable = computed(() => {
+  return tagdsStore.brands;
+});
+
+const order = ref(uiStore.filtering.order.selected);
+const type = ref(uiStore.filtering.type.selected);
+const retailer = ref(uiStore.filtering.retailer.selected);
+const brand = ref(uiStore.filtering.brand.selected);
+const currentlyListed = ref(uiStore.filtering.resale.listed);
+const currentlyAvailable = ref(uiStore.filtering.resale.available);
+
+onMounted(() => {
+  tagdsStore.fetchAll();
+});
 
 function onOrderChange() {
   uiStore.setFilteringOrder(order.value);
@@ -96,17 +127,26 @@ function onRetailerChange() {
   uiStore.setFilteringRetailer(retailer.value);
 }
 
+function onBrandChange() {
+  uiStore.setFilteringBrand(brand.value);
+}
+
 function onAvailableChange() {
-  uiStore.setFilteringAvailable(currentlyAvailable.value);
+  uiStore.setFilteringResaleAvailable(currentlyAvailable.value);
 }
 
 function onListedChange() {
-  uiStore.setFilteringListed(currentlyListed.value);
+  uiStore.setFilteringResaleListed(currentlyListed.value);
 }
 
-watch(retailers, () => {
-  uiStore.setFilteringRetailersOptions(retailers.value);
-  retailer.value = retailers.value;
+watch(retailersAvailable, () => {
+  uiStore.setFilteringRetailerOptions(retailersAvailable.value);
+  retailer.value = retailersAvailable.value;
+});
+
+watch(brandsAvailable, () => {
+  uiStore.setFilteringBrandOptions(brandsAvailable.value);
+  brand.value = brandsAvailable.value;
 });
 </script>
 
