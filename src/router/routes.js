@@ -8,9 +8,9 @@ const routes = [
     children: [
       // { path: '', component: () => import('pages/ItemsPage.vue') },
       {
-        name: 'items',
+        name: 'tagds',
         path: 'items',
-        component: () => import('src/pages/Items/Index.vue'),
+        component: () => import('src/pages/Tagds/Index.vue'),
       },
       {
         name: 'notifications',
@@ -34,9 +34,9 @@ const routes = [
     },
     children: [
       {
-        name: 'item',
+        name: 'tagd',
         path: ':id',
-        component: () => import('src/pages/Item/Show.vue'),
+        component: () => import('src/pages/Tagd/Show.vue'),
       },
     ],
   },
