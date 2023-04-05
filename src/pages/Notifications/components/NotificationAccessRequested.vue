@@ -206,7 +206,7 @@ function onAccept() {
       console.log(response);
     })
     .catch((error) => {
-      setErrorMessage('Something went wrong.');
+      setErrorMessage('Please check the auth code with the reseller');
       console.log(error);
     })
     .finally(() => {
