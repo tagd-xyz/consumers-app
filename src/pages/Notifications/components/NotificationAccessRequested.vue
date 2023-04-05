@@ -8,6 +8,7 @@
       <p class="text-negative" v-if="errorMessage">
         {{ errorMessage }}
       </p>
+
       <p v-if="isFetching">loading...</p>
       <p class="text-positive" v-if="isApproved">You accepted this request</p>
       <p class="text-negative" v-if="isRejected">You rejected this request</p>
@@ -15,7 +16,65 @@
     </q-card-section>
 
     <q-card-actions class="justify-start" v-if="areActionsEnabled">
-      <q-input outlined dense v-model="code" label="Code" class="q-mr-sm" />
+      <q-input
+        square
+        outlined
+        dense
+        v-model="digits[0]"
+        mask="#"
+        class="digit q-pa-none q-pr-sm"
+        ref="digit1"
+        item-aligned
+        :disable="!isDigitsEnabled"
+        @update:model-value="onDigit1Change"
+      />
+      <q-input
+        square
+        outlined
+        dense
+        v-model="digits[1]"
+        mask="#"
+        class="digit q-pa-none q-pr-sm"
+        ref="digit2"
+        item-aligned
+        :disable="!isDigitsEnabled"
+        @update:model-value="onDigit2Change"
+      />
+      <q-input
+        square
+        outlined
+        dense
+        v-model="digits[2]"
+        mask="#"
+        class="digit q-pa-none q-pr-sm"
+        ref="digit3"
+        item-aligned
+        :disable="!isDigitsEnabled"
+        @update:model-value="onDigit3Change"
+      />
+      <q-input
+        square
+        outlined
+        dense
+        v-model="digits[3]"
+        mask="#"
+        class="digit q-pa-none q-pr-sm"
+        ref="digit4"
+        item-aligned
+        :disable="!isDigitsEnabled"
+        @update:model-value="onDigit4Change"
+      />
+      <q-input
+        square
+        outlined
+        dense
+        v-model="digits[4]"
+        mask="#"
+        class="digit q-pa-none q-pr-sm"
+        ref="digit5"
+        item-aligned
+        :disable="!isDigitsEnabled"
+      />
       <q-btn
         no-caps
         color="primary"
@@ -46,7 +105,12 @@ import { useAccessRequestsStore } from 'stores/accessRequests';
 
 const accessRequestsStore = useAccessRequestsStore();
 
-const code = ref('');
+const digits = ref(['', '', '', '', '']);
+const digit1 = ref(null);
+const digit2 = ref(null);
+const digit3 = ref(null);
+const digit4 = ref(null);
+const digit5 = ref(null);
 const errorMessage = ref(null);
 const accessRequest = ref(null);
 
@@ -55,6 +119,10 @@ const props = defineProps({
   notification: {
     type: Object,
   },
+});
+
+const code = computed(() => {
+  return digits.value.join('');
 });
 
 const accessRequestId = computed(() => {
@@ -81,8 +149,16 @@ const areActionsEnabled = computed(() => {
   return !isFetching.value && isPending.value;
 });
 
+const isDigitsEnabled = computed(() => {
+  return !isApproving.value && !isRejecting.value;
+});
+
 const isApproveEnabled = computed(() => {
-  return !isApproving.value && !isRejecting.value && 8 == code.value.length;
+  return (
+    !isApproving.value &&
+    !isRejecting.value &&
+    digits.value.length == code.value.length
+  );
 });
 
 const isRejectEnabled = computed(() => {
@@ -149,7 +225,37 @@ function fetchAccessRequest() {
     });
 }
 
+function onDigit1Change() {
+  if (digits.value[0]) {
+    digit2.value.focus();
+  }
+}
+
+function onDigit2Change() {
+  if (digits.value[1]) {
+    digit3.value.focus();
+  }
+}
+
+function onDigit3Change() {
+  if (digits.value[2]) {
+    digit4.value.focus();
+  }
+}
+
+function onDigit4Change() {
+  if (digits.value[3]) {
+    digit5.value.focus();
+  }
+}
+
 onMounted(() => {
   fetchAccessRequest();
 });
 </script>
+
+<style scoped>
+.digit {
+  width: 2.5rem;
+}
+</style>
