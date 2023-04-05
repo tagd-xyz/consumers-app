@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col">
-        <p class="text-grey no-margin">Item Code</p>
+        <p class="text-grey no-margin">Tag</p>
       </div>
       <div class="col">
         <p>{{ tagd.slug }}</p>
@@ -30,6 +30,14 @@
       </div>
       <div class="col">
         <p>{{ tagd.createdAt }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p class="text-grey no-margin">Transaction ID</p>
+      </div>
+      <div class="col">
+        <p>{{ tagd.meta?.transaction ?? 'Unknown' }}</p>
       </div>
     </div>
   </div>

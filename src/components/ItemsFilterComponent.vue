@@ -39,14 +39,13 @@
       dense
     />
 
-    <div class="text-subtitle2 q-mt-md disabled">Listed for resale (wip)</div>
+    <div class="text-subtitle2 q-mt-md disabled">Listed for resale</div>
     <q-option-group
       v-model="currentlyListed"
       :options="resaleOptions"
       @update:model-value="onListedChange()"
       inline
       dense
-      disable
     />
 
     <!-- <q-separator class="q-my-lg" />
