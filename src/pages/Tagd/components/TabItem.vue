@@ -7,7 +7,7 @@
       </q-badge>
     </p>
     <p>
-      <span class="text-grey"> Item Code </span>
+      <span class="text-grey"> Tag </span>
       <span class="text-overline">{{ tagd.slug }}</span>
     </p>
     <p>
