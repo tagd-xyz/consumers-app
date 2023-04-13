@@ -35,9 +35,10 @@ onMounted(() => {
   auth.onAuthStateChanged(async (user) => {
     if (user) {
       // user is logged in, redirect
-      router.push({ name: 'items' });
+      router.push({ name: 'tagds' });
     } else {
       // user is logged out, start FirebaseUI
+      auth.tenantId = process.env.FIREBASE_TENANT_ID;
       authUI.start('#firebaseui-auth-container', config);
     }
   });

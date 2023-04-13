@@ -17,28 +17,38 @@ case ${ENV} in
     firebaseAuthDomain=""
     firebaseStorageBucket=""
     firebaseAppId=""
+    firebaseTenantId=""
     firebaseMeasurementId=""
     ;;
 
   qa|uat)
-    api_hostname="tagd-ret-api.${ENV}.tclstaging.com"
-    firebaseAuthDomain="${FIREBASE_PROJECT_ID}.firebaseapp.com"
-    firebaseStorageBucket="${FIREBASE_PROJECT_ID}.appspot.com"
+    api_hostname="tagd-con-api.${ENV}.tclstaging.com"
+    firebaseProjectId="FIREBASE_PROJECT_ID_${ENV}"
+    firebaseProjectId=${!firebaseProjectId}
+    firebaseAuthDomain="${firebaseProjectId}.firebaseapp.com"
+    firebaseStorageBucket="${firebaseProjectId}.appspot.com"
+    firebaseApiKey="FIREBASE_API_KEY_${ENV}"
+    firebaseApiKey=${!firebaseApiKey}
+    firebaseMessagingSenderId="FIREBASE_MESSAGING_ID_${ENV}"
+    firebaseMessagingSenderId=${!firebaseMessagingSenderId}
     firebaseAppId="FIREBASE_APP_ID_${ENV}"
     firebaseAppId=${!firebaseAppId}
     firebaseMeasurementId="FIREBASE_MEASUREMENT_ID_${ENV}"
     firebaseMeasurementId=${!firebaseMeasurementId}
+    firebaseTenantId="FIREBASE_TENANT_ID_${ENV}"
+    firebaseTenantId=${!firebaseTenantId}
     ;;
 esac
 
 API_URL=https://${api_hostname}/api/v1/
 
-FIREBASE_API_KEY=${FIREBASE_API_KEY}
+FIREBASE_API_KEY=${firebaseApiKey}
 FIREBASE_AUTH_DOMAIN=${firebaseAuthDomain}
-FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
+FIREBASE_PROJECT_ID=${firebaseProjectId}
 FIREBASE_STORAGE_BUCKET=${firebaseStorageBucket}
-FIREBASE_MESSAGING_SENDER_ID=${FIREBASE_MESSAGING_SENDER_ID}
+FIREBASE_MESSAGING_SENDER_ID=${firebaseMessagingSenderId}
 FIREBASE_APP_ID=${firebaseAppId}
+FIREBASE_TENANT_ID=${firebaseTenantId}
 FIREBASE_MEASUREMENT_ID=${firebaseMeasurementId}
 
 echo "ENV: ${ENV}"
@@ -50,6 +60,7 @@ echo "FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}"
 echo "FIREBASE_STORAGE_BUCKET: ${FIREBASE_STORAGE_BUCKET}"
 echo "FIREBASE_MESSAGING_SENDER_ID: ${FIREBASE_MESSAGING_SENDER_ID}"
 echo "FIREBASE_APP_ID: ${FIREBASE_APP_ID}"
+echo "FIREBASE_TENANT_ID: ${FIREBASE_TENANT_ID}"
 echo "FIREBASE_MEASUREMENT_ID: ${FIREBASE_MEASUREMENT_ID}"
 
 prepare_env_file ${local_env}
