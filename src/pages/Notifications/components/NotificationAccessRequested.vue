@@ -98,12 +98,12 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue';
 
-import { useAccessRequestsStore } from 'stores/accessRequests';
+import { useAccessRequestStore } from 'src/stores/accessRequest';
 // import { useRouter } from 'vue-router';
 
 // const router = useRouter();
 
-const accessRequestsStore = useAccessRequestsStore();
+const accessRequestsStore = useAccessRequestStore();
 
 const digits = ref(['', '', '', '', '']);
 const digit1 = ref(null);
