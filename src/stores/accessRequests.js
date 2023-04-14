@@ -5,20 +5,20 @@ export const useAccessRequestsStore = defineStore('accessRequests', {
   persist: true,
   state: () => {
     return {
+      list: [],
       is: {
         fetching: false,
-        approving: false,
-        rejecting: false,
       },
     };
   },
   actions: {
-    fetch(id) {
+    fetch() {
       return new Promise((resolve, reject) => {
         this.is.fetching = true;
         api
-          .get('resale-access-requests/' + id)
+          .get('resale-access-requests')
           .then((response) => {
+            this.list = response.data.data;
             resolve(response);
           })
           .catch((error) => {
@@ -26,40 +26,6 @@ export const useAccessRequestsStore = defineStore('accessRequests', {
           })
           .finally(() => {
             this.is.fetching = false;
-          });
-      });
-    },
-    approve(id, code) {
-      return new Promise((resolve, reject) => {
-        this.is.approving = true;
-        api
-          .post('resale-access-requests/' + id + '/approve', {
-            code: code,
-          })
-          .then((response) => {
-            resolve(response);
-          })
-          .catch((error) => {
-            reject(error);
-          })
-          .finally(() => {
-            this.is.approving = false;
-          });
-      });
-    },
-    reject(id) {
-      return new Promise((resolve, reject) => {
-        this.is.rejecting = true;
-        api
-          .post('resale-access-requests/' + id + '/reject')
-          .then((response) => {
-            resolve(response);
-          })
-          .catch((error) => {
-            reject(error);
-          })
-          .finally(() => {
-            this.is.rejecting = false;
           });
       });
     },
