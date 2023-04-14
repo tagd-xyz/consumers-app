@@ -1,98 +1,140 @@
 <template>
-  <q-card flat>
-    <q-card-section>
-      <p class="text-subtitle2 no-margin">Reseller Request</p>
-      <p class="text-h6 q-my-sm">
-        {{ notification?.data?.title }}
-      </p>
-      <p class="text-negative" v-if="errorMessage">
-        {{ errorMessage }}
-      </p>
+  <div>
+    <q-card flat>
+      <q-card-section>
+        <p class="text-subtitle2 no-margin">Reseller Request</p>
+        <p class="text-h6 no-margin">
+          {{ notification?.data?.title }}
+        </p>
 
-      <p v-if="isFetching">loading...</p>
-      <p class="text-positive" v-if="isApproved">You accepted this request</p>
-      <p class="text-negative" v-if="isRejected">You rejected this request</p>
-      <p class="text-negative" v-if="isRevoked">You revoked this request</p>
-    </q-card-section>
+        <p v-if="isFetching">loading...</p>
+        <p class="text-positive" v-if="isApproved">You accepted this request</p>
+        <p class="text-negative" v-if="isRejected">You rejected this request</p>
+        <p class="text-negative" v-if="isRevoked">You revoked this request</p>
+      </q-card-section>
+      <q-card-actions v-if="areActionsEnabled">
+        <q-btn
+          no-caps
+          color="primary"
+          :loading="isRejecting"
+          :disable="!isRejectEnabled"
+          @click="showDialog = true"
+          >Accept</q-btn
+        >
+        <q-btn
+          no-caps
+          outline
+          :loading="isRejecting"
+          :disable="!isRejectEnabled"
+          @click="onReject"
+          >Reject</q-btn
+        >
+      </q-card-actions>
+    </q-card>
+    <q-dialog v-model="showDialog" persistent>
+      <q-card>
+        <q-card-section
+          class="row items-center justify-center text-center q-mt-sm"
+        >
+          <img :src="reseller.logo" class="reseller-logo" alt="reseller logo" />
+        </q-card-section>
+        <q-card-section class="row items-center justify-center text-center">
+          <!-- <div>Reseller Request</div> -->
+          <span class="q-mx-lg text-h6">
+            {{ reseller.name }} has requested to access your items
+          </span>
+        </q-card-section>
+        <q-card-section class="row items-center justify-center text-center">
+          <span class=""> Enter 5 digit code </span>
+          <span class="text-negative" v-if="errorMessage && isCodeEmpty">
+            {{ errorMessage }}
+          </span>
+        </q-card-section>
 
-    <q-card-actions class="justify-start" v-if="areActionsEnabled">
-      <q-input
-        square
-        outlined
-        dense
-        v-model="digits[0]"
-        mask="#"
-        class="digit q-pa-none q-pr-sm"
-        ref="digit1"
-        item-aligned
-        :disable="!isDigitsEnabled"
-        @update:model-value="onDigit1Change"
-      />
-      <q-input
-        square
-        outlined
-        dense
-        v-model="digits[1]"
-        mask="#"
-        class="digit q-pa-none q-pr-sm"
-        ref="digit2"
-        item-aligned
-        :disable="!isDigitsEnabled"
-        @update:model-value="onDigit2Change"
-      />
-      <q-input
-        square
-        outlined
-        dense
-        v-model="digits[2]"
-        mask="#"
-        class="digit q-pa-none q-pr-sm"
-        ref="digit3"
-        item-aligned
-        :disable="!isDigitsEnabled"
-        @update:model-value="onDigit3Change"
-      />
-      <q-input
-        square
-        outlined
-        dense
-        v-model="digits[3]"
-        mask="#"
-        class="digit q-pa-none q-pr-sm"
-        ref="digit4"
-        item-aligned
-        :disable="!isDigitsEnabled"
-        @update:model-value="onDigit4Change"
-      />
-      <q-input
-        square
-        outlined
-        dense
-        v-model="digits[4]"
-        mask="#"
-        class="digit q-pa-none q-pr-sm"
-        ref="digit5"
-        item-aligned
-        :disable="!isDigitsEnabled"
-      />
-      <q-btn
-        no-caps
-        color="primary"
-        :loading="isApproving"
-        :disable="!isApproveEnabled"
-        @click="onAccept"
-        >Accept</q-btn
-      >
-      <q-btn
-        no-caps
-        color="negative"
-        :loading="isRejecting"
-        :disable="!isRejectEnabled"
-        @click="onReject"
-        >Reject</q-btn
-      >
-    </q-card-actions>
-  </q-card>
+        <q-card-actions class="justify-center">
+          <q-input
+            square
+            outlined
+            dense
+            v-model="digits[0]"
+            mask="#"
+            class="digit q-pa-none q-pr-sm"
+            ref="digit1"
+            item-aligned
+            :disable="!isDigitsEnabled"
+            @update:model-value="onDigit1Change"
+          />
+          <q-input
+            square
+            outlined
+            dense
+            v-model="digits[1]"
+            mask="#"
+            class="digit q-pa-none q-pr-sm"
+            ref="digit2"
+            item-aligned
+            :disable="!isDigitsEnabled"
+            @update:model-value="onDigit2Change"
+          />
+          <q-input
+            square
+            outlined
+            dense
+            v-model="digits[2]"
+            mask="#"
+            class="digit q-pa-none q-pr-sm"
+            ref="digit3"
+            item-aligned
+            :disable="!isDigitsEnabled"
+            @update:model-value="onDigit3Change"
+          />
+          <q-input
+            square
+            outlined
+            dense
+            v-model="digits[3]"
+            mask="#"
+            class="digit q-pa-none q-pr-sm"
+            ref="digit4"
+            item-aligned
+            :disable="!isDigitsEnabled"
+            @update:model-value="onDigit4Change"
+          />
+          <q-input
+            square
+            outlined
+            dense
+            v-model="digits[4]"
+            mask="#"
+            class="digit q-pa-none q-pr-sm"
+            ref="digit5"
+            item-aligned
+            :disable="!isDigitsEnabled"
+          />
+        </q-card-actions>
+
+        <q-card-actions align="center">
+          <q-btn
+            v-if="isApproveEnabled || isApproving"
+            no-caps
+            class="full-width q-my-sm"
+            label="Accept"
+            color="primary"
+            :loading="isApproving"
+            @click="onAccept"
+          />
+          <q-btn
+            v-if="!isApproveEnabled && !isApproving"
+            flat
+            no-caps
+            v-close-popup
+            class="full-width q-my-sm"
+            label="Close"
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+  </div>
 </template>
 
 <script setup>
@@ -113,12 +155,17 @@ const digit4 = ref(null);
 const digit5 = ref(null);
 const errorMessage = ref(null);
 const accessRequest = ref(null);
+const showDialog = ref(false);
 
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
   notification: {
     type: Object,
   },
+});
+
+const reseller = computed(() => {
+  return props.notification?.data?.reseller;
 });
 
 const code = computed(() => {
@@ -153,6 +200,10 @@ const isDigitsEnabled = computed(() => {
   return !isApproving.value && !isRejecting.value;
 });
 
+const isCodeEmpty = computed(() => {
+  return 0 == code.value.length;
+});
+
 const isApproveEnabled = computed(() => {
   return (
     !isApproving.value &&
@@ -180,19 +231,16 @@ const isRejecting = computed(() => {
 function setErrorMessage(message) {
   errorMessage.value = message;
   setTimeout(() => {
-    errorMessage.value = null;
+    // errorMessage.value = null;
   }, 5000);
 }
 
 function onReject() {
   accessRequestsStore
     .reject(accessRequestId.value)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
+    .then(() => {})
+    .catch(() => {
       setErrorMessage('Something went wrong.');
-      console.log(error);
     })
     .finally(() => {
       fetchAccessRequest();
@@ -202,12 +250,12 @@ function onReject() {
 function onAccept() {
   accessRequestsStore
     .approve(accessRequestId.value, code.value)
-    .then((response) => {
-      console.log(response);
+    .then(() => {
+      showDialog.value = false;
     })
-    .catch((error) => {
+    .catch(() => {
       setErrorMessage('Please check the auth code with the reseller');
-      console.log(error);
+      digits.value = ['', '', '', '', ''];
     })
     .finally(() => {
       fetchAccessRequest();
@@ -255,6 +303,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.reseller-logo {
+  max-width: 5rem;
+}
 .digit {
   width: 2.5rem;
 }
