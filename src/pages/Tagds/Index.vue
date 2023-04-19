@@ -97,9 +97,12 @@ function filterItemsByTagdStatus(status) {
     return tagd.status == status;
   });
 
-  const listFiltered = filterItemsByFilters(listByStatus);
+  console.log(filterItemsByFilters(listByStatus));
 
-  return sortItems(listFiltered);
+  return sortItems(listByStatus);
+
+  // const listFiltered = filterItemsByFilters(listByStatus);
+  // return sortItems(listFiltered);
 }
 
 function sortItems(items) {

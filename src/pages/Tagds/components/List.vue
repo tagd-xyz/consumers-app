@@ -19,9 +19,11 @@
         <q-card-section horizontal>
           <q-card-section class="col-5 flex flex-center">
             <q-img
+              v-if="tagd.item.images.length > 0"
               class="rounded-borders"
-              src="https://picsum.photos/seed/picsum/200/300"
+              :src="tagd.item.images[0].thumbnail"
             />
+            <div v-else>No images</div>
           </q-card-section>
           <q-card-section class="q-pt-xs">
             <div class="text-caption text-grey">
