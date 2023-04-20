@@ -135,8 +135,6 @@ function filterItemsByFilters(items) {
       (listedFilter && isListed) ||
       (!listedFilter && !isListed);
 
-    console.log(item.item.type, types, types?.includes(item.item.type));
-
     return (
       types?.includes(item.item.type) &&
       retailers?.includes(item.item.retailer) &&
