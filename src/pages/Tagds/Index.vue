@@ -97,12 +97,8 @@ function filterItemsByTagdStatus(status) {
     return tagd.status == status;
   });
 
-  console.log(filterItemsByFilters(listByStatus));
-
-  return sortItems(listByStatus);
-
-  // const listFiltered = filterItemsByFilters(listByStatus);
-  // return sortItems(listFiltered);
+  const listFiltered = filterItemsByFilters(listByStatus);
+  return sortItems(listFiltered);
 }
 
 function sortItems(items) {
@@ -138,6 +134,8 @@ function filterItemsByFilters(items) {
       null == listedFilter ||
       (listedFilter && isListed) ||
       (!listedFilter && !isListed);
+
+    console.log(item.item.type, types, types?.includes(item.item.type));
 
     return (
       types?.includes(item.item.type) &&

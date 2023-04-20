@@ -9,7 +9,7 @@
       </div>
       <div v-else>
         <q-card flat>
-          <q-card-section>
+          <q-card-section v-if="meStore.data?.actors">
             Display name: {{ meStore.data?.actors[0].name ?? '' }}
             <br />
             Email: {{ meStore.data.email }}

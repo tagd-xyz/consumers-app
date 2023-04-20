@@ -36,7 +36,7 @@
         <q-card-section
           class="row items-center justify-center text-center q-mt-sm"
         >
-          <img :src="reseller.logo" class="reseller-logo" alt="reseller logo" />
+          <img :src="logo" class="reseller-logo" alt="reseller logo" />
         </q-card-section>
         <q-card-section class="row items-center justify-center text-center">
           <!-- <div>Reseller Request</div> -->
@@ -162,6 +162,10 @@ const props = defineProps({
   notification: {
     type: Object,
   },
+});
+
+const logo = computed(() => {
+  return props.notification?.data?.logo;
 });
 
 const reseller = computed(() => {
