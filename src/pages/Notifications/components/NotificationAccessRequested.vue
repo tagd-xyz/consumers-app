@@ -45,7 +45,7 @@
           </span>
         </q-card-section>
         <q-card-section class="row items-center justify-center text-center">
-          <span class=""> Enter 5 digit code </span>
+          <span class=""> Enter 6 digit code </span>
           <span class="text-negative" v-if="errorMessage && isCodeEmpty">
             {{ errorMessage }}
           </span>
@@ -110,6 +110,18 @@
             ref="digit5"
             item-aligned
             :disable="!isDigitsEnabled"
+            @update:model-value="onDigit5Change"
+          />
+          <q-input
+            square
+            outlined
+            dense
+            v-model="digits[5]"
+            mask="#"
+            class="digit q-pa-none q-pr-sm"
+            ref="digit6"
+            item-aligned
+            :disable="!isDigitsEnabled"
           />
         </q-card-actions>
 
@@ -147,12 +159,13 @@ import { useAccessRequestStore } from 'src/stores/accessRequest';
 
 const accessRequestsStore = useAccessRequestStore();
 
-const digits = ref(['', '', '', '', '']);
+const digits = ref(['', '', '', '', '', '']);
 const digit1 = ref(null);
 const digit2 = ref(null);
 const digit3 = ref(null);
 const digit4 = ref(null);
 const digit5 = ref(null);
+const digit6 = ref(null);
 const errorMessage = ref(null);
 const accessRequest = ref(null);
 const showDialog = ref(false);
@@ -298,6 +311,12 @@ function onDigit3Change() {
 function onDigit4Change() {
   if (digits.value[3]) {
     digit5.value.focus();
+  }
+}
+
+function onDigit5Change() {
+  if (digits.value[4]) {
+    digit6.value.focus();
   }
 }
 
