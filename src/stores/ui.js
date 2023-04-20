@@ -8,8 +8,8 @@ const filteringOrderOptions = {
 };
 
 const filteringTypeOptions = {
-  fashion: 'Fashion',
-  sneakers: 'Sneakers',
+  fashion: 'fashion',
+  sneakers: 'sneakers',
 };
 
 const filteringResaleOptions = {

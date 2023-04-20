@@ -4,26 +4,30 @@
 
     <q-page-container class="q-ma-lg">
       <div class="text-h5">Account details</div>
+      <div v-if="isFetching" class="text-center">
+        <q-spinner color="primary" size="3em" class="q-ma-lg" />
+      </div>
+      <div v-else>
+        <q-card flat>
+          <q-card-section v-if="meStore.data?.actors">
+            Display name: {{ meStore.data?.actors[0].name ?? '' }}
+            <br />
+            Email: {{ meStore.data.email }}
+          </q-card-section>
+        </q-card>
 
-      <q-card flat>
-        <q-card-section>
-          Display name: {{ meStore.data?.actors[0].name ?? '' }}
-          <br />
-          Email: {{ meStore.data.email }}
-        </q-card-section>
-      </q-card>
-
-      <div class="row">
-        <div class="col">
-          <q-btn
-            no-caps
-            color="primary"
-            label="Sign Out"
-            size="lg"
-            text-align="center"
-            class="full-width q-my-sm"
-            @click="showDialog = true"
-          />
+        <div class="row">
+          <div class="col">
+            <q-btn
+              no-caps
+              color="primary"
+              label="Sign Out"
+              size="lg"
+              text-align="center"
+              class="full-width q-my-sm"
+              @click="showDialog = true"
+            />
+          </div>
         </div>
       </div>
 
@@ -103,6 +107,10 @@ const accessRequests = computed(() => {
   return accessRequestsStore.list.filter((accessRequest) => {
     return accessRequest.isApproved;
   });
+});
+
+const isFetching = computed(() => {
+  return meStore.is.fetching;
 });
 
 onMounted(() => {
