@@ -8,38 +8,50 @@
       control-color="primary"
       class="rounded-borders items-gallery"
     >
-      <q-carousel-slide name="1" class="column no-wrap flex-center">
-        <img src="https://picsum.photos/id/326/640/480" />
-      </q-carousel-slide>
-      <q-carousel-slide name="2" class="column no-wrap flex-center">
-        <img src="https://picsum.photos/id/370/640/480" />
-      </q-carousel-slide>
-      <q-carousel-slide name="3" class="column no-wrap flex-center">
-        <img src="https://picsum.photos/id/429/640/480" />
-      </q-carousel-slide>
-      <q-carousel-slide name="4" class="column no-wrap flex-center">
-        <img src="https://picsum.photos/id/445/640/480" />
+      <q-carousel-slide
+        v-for="image in images"
+        :key="image.id"
+        :name="image.id"
+        class="column no-wrap flex-center"
+      >
+        <img :src="image.url" />
       </q-carousel-slide>
     </q-carousel>
 
     <div class="row justify-center q-mt-sm">
-      <q-btn-toggle
-        v-model="slide"
-        :options="[
-          { label: 1, value: '1' },
-          { label: 2, value: '2' },
-          { label: 3, value: '3' },
-          { label: 4, value: '4' },
-        ]"
-      />
+      <q-btn-toggle v-model="slide" :options="options" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
-const slide = ref('1');
+// eslint-disable-next-line no-unused-vars
+const props = defineProps({
+  images: {
+    type: Array,
+    required: true,
+    default: () => [],
+  },
+});
+
+const slide = ref(null);
+
+const options = computed(() => {
+  return props.images.map((image, index) => {
+    return {
+      label: index + 1,
+      value: image.id,
+    };
+  });
+});
+
+onMounted(() => {
+  if (props.images.length > 0) {
+    slide.value = 1;
+  }
+});
 </script>
 
 <style scoped>

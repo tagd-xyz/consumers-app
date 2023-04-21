@@ -9,12 +9,10 @@
 import firebase from 'firebase/compat/app';
 import 'firebaseui/dist/firebaseui.css';
 import { onMounted } from 'vue';
-import { useAuthStore } from 'stores/auth';
 import { auth, authUI } from 'boot/firebase';
 import { useRouter } from 'vue-router';
 import LogoComponent from 'components/LogoComponent.vue';
 
-const store = useAuthStore();
 const router = useRouter();
 
 onMounted(() => {
@@ -23,10 +21,9 @@ onMounted(() => {
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
       // this.$fireModule.auth.GoogleAuthProvider.PROVIDER_ID,
     ],
-    signInSuccessUrl: '/items',
+    signInSuccessUrl: '/splash',
     callbacks: {
-      signInSuccessWithAuthResult(authResult) {
-        store.signIn(authResult.user);
+      signInSuccessWithAuthResult() {
         return true;
       },
     },
@@ -35,7 +32,7 @@ onMounted(() => {
   auth.onAuthStateChanged(async (user) => {
     if (user) {
       // user is logged in, redirect
-      router.push({ name: 'tagds' });
+      router.push({ name: 'splash' });
     } else {
       // user is logged out, start FirebaseUI
       auth.tenantId = process.env.FIREBASE_TENANT_ID;

@@ -51,6 +51,17 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/splash',
+    component: () => import('layouts/Auth.vue'),
+    children: [
+      {
+        name: 'splash',
+        path: '',
+        component: () => import('pages/SignIn/Splash.vue'),
+      },
+    ],
+  },
 
   // Always leave this as last one,
   // but you can also remove it

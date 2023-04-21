@@ -1,8 +1,12 @@
 <template>
   <div>
     <Header @backClicked="onBackClicked" />
-    <Gallery />
     <div v-if="!isLoading">
+      <Gallery
+        v-if="tagd?.item.images.length > 0"
+        :images="tagd?.item.images"
+      />
+
       <TabChoose :active="Tabs.Item" @tabClick="onTabClicked" />
 
       <q-tab-panels v-model="activeTab" animated>
@@ -72,7 +76,7 @@ const tagdId = computed(() => {
 // }
 
 function onBackClicked() {
-  router.go(-1);
+  router.push({ name: 'tagds' });
 }
 
 function onTabClicked(tab) {

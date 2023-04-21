@@ -2,7 +2,9 @@
 
 Tagd
 
-[![Build status](https://build.appcenter.ms/v0.1/apps/88e5cb87-335e-45c4-abf3-2c0e5ca3c5c5/branches/feature%2Fandroid/badge)](https://appcenter.ms)
+| Env | Build Status                                                                                                                                        |
+| --- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| QA  | [![Build status](https://build.appcenter.ms/v0.1/apps/88e5cb87-335e-45c4-abf3-2c0e5ca3c5c5/branches/feature%2Fandroid/badge)](https://appcenter.ms) |
 
 ## Install the dependencies
 

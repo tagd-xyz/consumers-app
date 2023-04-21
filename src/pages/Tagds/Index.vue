@@ -98,7 +98,6 @@ function filterItemsByTagdStatus(status) {
   });
 
   const listFiltered = filterItemsByFilters(listByStatus);
-
   return sortItems(listFiltered);
 }
 
