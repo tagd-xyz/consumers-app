@@ -3,5 +3,8 @@
   "appName": "Tagd",
   "bundledWebRuntime": false,
   "npmClient": "yarn",
-  "webDir": "www"
+  "webDir": "www",
+  "server": {
+    "url": "http://172.18.0.1:3103"
+  }
 }
