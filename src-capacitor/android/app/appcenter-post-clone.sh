@@ -25,6 +25,9 @@ cd ../../..
 # install dependencies
 yarn install
 
+# create .env.production
+echo "${DOTENV}" | base64 -d > .env
+
 # go to src-capacitor and install dependencies there
 pwd
 ls -la
