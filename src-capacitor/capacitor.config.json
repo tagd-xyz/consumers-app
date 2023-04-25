@@ -1,0 +1,7 @@
+{
+  "appId": "com.tagd.consumers.app",
+  "appName": "Tagd",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www"
+}

@@ -1,0 +1,10 @@
+{
+  "appId": "com.tagd.consumers.app",
+  "appName": "Tagd",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www",
+  "server": {
+    "url": "http://172.18.0.1:3103"
+  }
+}

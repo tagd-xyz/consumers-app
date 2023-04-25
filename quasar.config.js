@@ -62,7 +62,10 @@ module.exports = configure(function (/* ctx */) {
 
       // publicPath: '/',
       // analyze: true,
-      env: require('dotenv').config({ path: '.env' }).parsed,
+      env: require('dotenv').config({
+        debug: true,
+        path: process.cwd().endsWith('src-capacitor') ? './../.env' : '.env',
+      }).parsed,
       // rawDefine: {}
       // ignorePublicFolder: true,
       // minify: false,
@@ -160,7 +163,7 @@ module.exports = configure(function (/* ctx */) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli/developing-capacitor-apps/configuring-capacitor
     capacitor: {
-      hideSplashscreen: true,
+      hideSplashscreen: false,
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli/developing-electron-apps/configuring-electron
