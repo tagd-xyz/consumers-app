@@ -31,6 +31,7 @@ echo "${DOTENV}" | base64 -d > .env
 # go to src-capacitor and install dependencies there
 pwd
 ls -la
+cat .env
 cd src-capacitor
 yarn install
 
