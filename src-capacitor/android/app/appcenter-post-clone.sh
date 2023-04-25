@@ -28,10 +28,12 @@ yarn install
 # create .env.production
 echo "${DOTENV}" | base64 -d > .env
 
+# debug only
+# pwd
+# ls -la
+# cat .env
+
 # go to src-capacitor and install dependencies there
-pwd
-ls -la
-cat .env
 cd src-capacitor
 yarn install
 
