@@ -26,9 +26,12 @@
             <div v-else>No images</div>
           </q-card-section>
           <q-card-section class="q-pt-xs">
-            <div class="text-caption text-grey">
-              {{ tagd.item.description }}
-            </div>
+            <div
+              class="text-caption text-grey"
+              v-html="
+                tagd.item.description.replace(/(?:\r\n|\r|\n)/g, '<br />')
+              "
+            ></div>
             <div class="text-subtitle1">
               {{ tagd.item.retailer }}
             </div>

@@ -10,9 +10,7 @@
       <span class="text-grey"> Tag </span>
       <span class="text-overline">{{ tagd?.slug }}</span>
     </p>
-    <p>
-      {{ tagd?.item.description }}
-    </p>
+    <p v-html="tagd?.item.description.replace(/(?:\r\n|\r|\n)/g, '<br />')" />
     <div class="row">
       <div class="col">
         <p class="text-grey no-margin">Brand</p>
