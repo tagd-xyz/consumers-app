@@ -16,7 +16,8 @@
     "build:ios": "quasar build -m capacitor -T ios --skip-pkg",
     "lint": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "format": "prettier --write \"**/*.{js,vue,scss,html,md,json}\" --ignore-path .gitignore",
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "icons": "icongenie generate -i AppIcon.png --skip-trim"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
