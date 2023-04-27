@@ -1,8 +1,8 @@
 <template>
   <div>
-    <q-header class="bg-white text-black" height-hint="98">
+    <q-header class="bg-white text-black q-pt-md" height-hint="98">
       <q-toolbar>
-        <q-toolbar-title class="absolute-center text-h6">
+        <q-toolbar-title class="absolute-center text-subtitle2">
           {{ title }}
         </q-toolbar-title>
       </q-toolbar>

@@ -9,7 +9,7 @@
       no-caps
       @click="onBackClicked"
     />
-    <q-toolbar-title class="absolute-center text-h6">
+    <q-toolbar-title class="absolute-center text-subtitle2">
       Product details
     </q-toolbar-title>
   </q-toolbar>

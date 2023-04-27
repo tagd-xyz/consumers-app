@@ -7,14 +7,18 @@
       animated
       control-color="primary"
       class="rounded-borders items-gallery"
+      height="15rem"
     >
       <q-carousel-slide
         v-for="image in images"
         :key="image.id"
         :name="image.id"
+        swipeable
+        navigation
         class="column no-wrap flex-center"
+        :img-src="image.url"
       >
-        <img :src="image.url" />
+        <!-- <img :src="image.url" /> -->
       </q-carousel-slide>
     </q-carousel>
 
@@ -56,6 +60,6 @@ onMounted(() => {
 
 <style scoped>
 .items-gallery {
-  max-height: 15rem;
+  /* max-height: 15rem; */
 }
 </style>

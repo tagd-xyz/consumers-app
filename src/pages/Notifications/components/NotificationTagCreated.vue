@@ -4,7 +4,7 @@
       <p class="text-subtitle2 no-margin">
         {{ notification?.data?.title }}
       </p>
-      <p class="text-h6 q-my-sm">
+      <p class="text-subtitle1 text-bold no-margin">
         {{ notification?.data?.tagd?.item?.name }}
       </p>
       <p class="text-subtitle2 no-margin">
@@ -13,7 +13,7 @@
       </p>
       <p class="text-subtitle2 no-margin">
         <span class="text-grey">from </span>
-        <span class="text-primary">
+        <span class="text-primary text-bold">
           {{ notification?.data?.tagd?.item?.retailer?.name }}
         </span>
       </p>
