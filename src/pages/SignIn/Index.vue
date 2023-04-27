@@ -2,18 +2,24 @@
   <q-page class="flex flex-center row">
     <logo-component />
     <div id="firebaseui-auth-container"></div>
+    <debug-info class="fixed-bottom-right" v-if="isDebugEnabled" />
   </q-page>
 </template>
 
 <script setup>
 import firebase from 'firebase/compat/app';
 import 'firebaseui/dist/firebaseui.css';
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 import { auth, authUI } from 'boot/firebase';
 import { useRouter } from 'vue-router';
 import LogoComponent from 'components/LogoComponent.vue';
+import DebugInfo from './components/DebugInfo.vue';
 
 const router = useRouter();
+
+const isDebugEnabled = computed(() => {
+  return process.env.DEBUG_ENABLED ?? false;
+});
 
 onMounted(() => {
   const config = {
