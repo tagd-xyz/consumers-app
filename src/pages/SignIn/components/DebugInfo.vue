@@ -8,10 +8,10 @@
 import { computed } from 'vue';
 
 const buildId = computed(() => {
-  return process.env.APPCENTER_BUILD_ID ?? '?';
+  return process.env.DEBUG_BUILD_ID ?? '?';
 });
 
 const buildBranch = computed(() => {
-  return process.env.APPCENTER_BRANCH ?? '?';
+  return process.env.DEBUG_BRANCH ?? '?';
 });
 </script>
