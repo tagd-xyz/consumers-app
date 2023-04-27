@@ -64,7 +64,7 @@ module.exports = configure(function (/* ctx */) {
       // analyze: true,
       env: require('dotenv').config({
         debug: true,
-        path: '.env',
+        path: process.cwd().endsWith('src-capacitor') ? './../.env' : '.env',
       }).parsed,
       // rawDefine: {}
       // ignorePublicFolder: true,

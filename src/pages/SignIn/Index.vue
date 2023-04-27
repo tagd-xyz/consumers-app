@@ -2,7 +2,6 @@
   <q-page class="flex flex-center row">
     <logo-component />
     <div id="firebaseui-auth-container"></div>
-    <debug-info class="fixed-bottom-right" />
   </q-page>
 </template>
 
@@ -12,7 +11,6 @@ import 'firebaseui/dist/firebaseui.css';
 import { onMounted } from 'vue';
 import { auth, authUI } from 'boot/firebase';
 import { useRouter } from 'vue-router';
-import { DebugInfo } from './components/DebugInfo.vue';
 import LogoComponent from 'components/LogoComponent.vue';
 
 const router = useRouter();
