@@ -1,5 +1,5 @@
 <template>
-  <q-page-container class="q-pa-md q-ma-md">
+  <q-page-container class="q-px-sm">
     <div v-if="isLoading" class="flex flex-center">
       <q-spinner color="primary" size="1.5rem" />
     </div>
@@ -7,7 +7,7 @@
       There are no items
     </p>
     <div v-else>
-      <p class="text-caption">{{ listCount }}</p>
+      <p class="text-body2">{{ listCount }}</p>
       <q-card
         v-for="tagd in tagds"
         :key="tagd.id"
@@ -25,13 +25,10 @@
             />
             <div v-else>No images</div>
           </q-card-section>
-          <q-card-section class="q-pt-xs">
-            <div
-              class="text-caption text-grey"
-              v-html="
-                tagd.item.description.replace(/(?:\r\n|\r|\n)/g, '<br />')
-              "
-            ></div>
+          <q-card-section class="">
+            <div class="text-caption text-grey">
+              {{ tagd.item.description.replace(/(?:\r\n|\r|\n)/g, '<br />') }}
+            </div>
             <div class="text-subtitle1">
               {{ tagd.item.retailer }}
             </div>

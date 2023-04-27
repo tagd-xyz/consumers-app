@@ -28,6 +28,11 @@ yarn install
 # create .env.production
 echo "${DOTENV}" | base64 -d > .env
 
+# add debug info
+echo "DEBUG_ENABLED=true" >> .env
+echo "DEBUG_BUILD_ID=${APPCENTER_BUILD_ID}" >> .env
+echo "DEBUG_BRANCH=${APPCENTER_BRANCH}" >> .env
+
 # debug only
 # pwd
 # ls -la
