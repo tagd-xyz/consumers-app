@@ -2,7 +2,7 @@
   <div>
     <q-header class="bg-white text-black" height-hint="98">
       <q-toolbar>
-        <q-toolbar-title>
+        <q-toolbar-title class="q-my-lg q-mx-md">
           <q-input
             :disable="isLoading"
             outlined
@@ -11,7 +11,7 @@
             label="Search"
           >
             <template v-slot:prepend>
-              <q-icon name="search" />
+              <q-icon name="search" color="grey" />
             </template>
           </q-input>
         </q-toolbar-title>
@@ -25,7 +25,7 @@
           @click="toggleRightDrawer"
         />
       </q-toolbar>
-      <q-btn-group class="q-mx-xl" spread rounded>
+      <q-btn-group class="q-mx-lg" spread rounded>
         <q-btn
           no-caps
           rounded

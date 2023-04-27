@@ -20,6 +20,7 @@
     "icons": "icongenie generate -i AppIcon.png --skip-trim"
   },
   "dependencies": {
+    "@capacitor/keyboard": "^4.1.1",
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "firebase": "^9.17.1",
