@@ -6,6 +6,7 @@
         align="center"
         indicator-color="transparent"
         active-color="primary"
+        :breakpoint="0"
       >
         <q-route-tab no-caps to="/items" icon="sell" label="Your Tags" />
         <q-route-tab
