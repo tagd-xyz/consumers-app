@@ -27,7 +27,7 @@
           </q-card-section>
           <q-card-section class="">
             <div class="text-caption text-grey">
-              {{ tagd.item.description }}
+              {{ tagd.item.description.replace(/(?:\r\n|\r|\n)/g, '<br />') }}
             </div>
             <div class="text-subtitle1">
               {{ tagd.item.retailer }}
