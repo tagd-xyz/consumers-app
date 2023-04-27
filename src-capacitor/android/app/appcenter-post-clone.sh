@@ -25,13 +25,24 @@ cd ../../..
 # install dependencies
 yarn install
 
-# create .env.production
-echo "${DOTENV}" | base64 -d > .env
+# create .env
+echo "${DOTENV}" | base64 -d > ../.env
 
 # debug only
-# pwd
-# ls -la
-# cat .env
+pwd
+ls -la ..
+
+# create buildInfo
+mkdir -p ../src/assets
+json="{\"environment\": \"${APPCENTER_BRANCH}\", \"id\": \"${APPCENTER_BUILD_ID}\"}"
+echo "$json" > ../src/assets/buildInfo.json
+
+# debug only
+pwd
+ls -la ..
+
+cat ../src/assets/buildInfo.json
+# cat ../.env
 
 # go to src-capacitor and install dependencies there
 cd src-capacitor
