@@ -3,7 +3,7 @@
     <Header title="Your account" />
 
     <q-page-container class="q-ma-lg">
-      <div class="text-h5">Account details</div>
+      <div class="text-subtitle1 text-bold">Account details</div>
       <div v-if="isFetching" class="text-center">
         <q-spinner color="primary" size="3em" class="q-ma-lg" />
       </div>
@@ -20,9 +20,10 @@
           <div class="col">
             <q-btn
               no-caps
+              outline
               color="primary"
               label="Sign Out"
-              size="lg"
+              size="md"
               text-align="center"
               class="full-width q-my-sm"
               @click="showDialog = true"
@@ -31,7 +32,7 @@
         </div>
       </div>
 
-      <div class="text-h5 q-mt-lg">Approved Resellers</div>
+      <div class="text-subtitle1 text-bold q-mt-lg">Approved Resellers</div>
 
       <div v-if="isFetchingAccessRequests" class="text-center">
         <q-spinner color="primary" size="3em" class="q-ma-lg" />

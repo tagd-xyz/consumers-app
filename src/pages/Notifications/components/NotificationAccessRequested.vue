@@ -3,7 +3,7 @@
     <q-card flat>
       <q-card-section>
         <p class="text-subtitle2 no-margin">Reseller Request</p>
-        <p class="text-h6 no-margin">
+        <p class="text-subtitle1 text-bold no-margin">
           {{ notification?.data?.title }}
         </p>
 
