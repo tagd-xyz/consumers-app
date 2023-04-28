@@ -5,24 +5,31 @@
       transition-prev="slide-right"
       transition-next="slide-left"
       animated
-      control-color="primary"
+      swipeable
+      :thumbnails="isFullscreen"
+      :navigation="!isFullscreen"
+      :fullscreen="isFullscreen"
       class="rounded-borders items-gallery"
-      height="15rem"
+      height="20rem"
     >
       <q-carousel-slide
         v-for="image in images"
         :key="image.id"
         :name="image.id"
-        swipeable
-        navigation
         class="column no-wrap flex-center"
-        :img-src="image.url"
+        :img-src="image.square"
+        @click="toggleFullscreen"
       >
-        <!-- <img :src="image.url" /> -->
+        <q-badge
+          rounded
+          class="absolute-top-right q-ma-md q-pa-sm"
+          v-if="!isFullscreen"
+          >Listed for resale</q-badge
+        >
       </q-carousel-slide>
     </q-carousel>
 
-    <div class="row justify-center q-mt-sm">
+    <div class="row justify-center q-mt-sm" v-if="false">
       <q-btn-toggle v-model="slide" :options="options" />
     </div>
   </div>
@@ -41,6 +48,7 @@ const props = defineProps({
 });
 
 const slide = ref(null);
+const isFullscreen = ref(false);
 
 const options = computed(() => {
   return props.images.map((image, index) => {
@@ -50,6 +58,10 @@ const options = computed(() => {
     };
   });
 });
+
+function toggleFullscreen() {
+  isFullscreen.value = !isFullscreen.value;
+}
 
 onMounted(() => {
   if (props.images.length > 0) {
