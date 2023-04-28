@@ -8,7 +8,6 @@
         :notification="notification"
       >
       </Notification>
-      <q-inner-loading :showing="store.is.fetching" />
     </q-page-container>
   </div>
 </template>
@@ -18,14 +17,22 @@ import Header from './components/Header.vue';
 import Notification from './components/Notification.vue';
 import { computed, onMounted } from 'vue';
 import { useNotificationsStore } from 'stores/notifications';
+import { useQuasar } from 'quasar';
 
+const $q = useQuasar();
 const store = useNotificationsStore();
+
+$q.loading.show({
+  delay: 1000,
+});
 
 const list = computed(() => {
   return store.list;
 });
 
 onMounted(() => {
-  store.fetchAll();
+  store.fetchAll().finally(() => {
+    $q.loading.hide();
+  });
 });
 </script>

@@ -41,8 +41,15 @@ import { computed, onMounted, ref } from 'vue';
 import { useTagdsStore } from 'stores/tagds';
 import { useUiStore } from 'stores/ui';
 import { useRouter } from 'vue-router';
+import { useQuasar } from 'quasar';
 import Header from './components/Header.vue';
 import List from './components/List.vue';
+
+const $q = useQuasar();
+
+$q.loading.show({
+  delay: 1000,
+});
 
 //TODO: reuse from component
 const Tabs = {
@@ -159,8 +166,9 @@ function onHeaderSearch(text) {
 // }
 
 onMounted(() => {
-  tagdsStore.fetchAll().then(() => {
+  tagdsStore.fetchAll().finally(() => {
     // initActiveTab();
+    $q.loading.hide();
   });
 });
 
