@@ -22,10 +22,22 @@
       >
         <q-badge
           rounded
+          color="primary"
           class="absolute-top-right q-ma-md q-pa-sm"
-          v-if="!isFullscreen"
-          >Listed for resale</q-badge
+          v-if="!isFullscreen && isListedForResale"
         >
+          <q-icon name="sell" class="q-mr-sm" color="white" />
+          Listed for resale
+        </q-badge>
+        <q-badge
+          rounded
+          color="positive"
+          class="absolute-top-right q-ma-md q-pa-sm"
+          v-if="!isFullscreen && isAvailableForResale"
+        >
+          <q-icon name="sell" class="q-mr-sm" color="white" />
+          Available for resale
+        </q-badge>
       </q-carousel-slide>
     </q-carousel>
 
@@ -40,6 +52,16 @@ import { computed, onMounted, ref } from 'vue';
 
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
+  isListedForResale: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+  isAvailableForResale: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
   images: {
     type: Array,
     required: true,
