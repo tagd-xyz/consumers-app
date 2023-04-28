@@ -14,7 +14,7 @@
         <div class="row">
           <div class="col text-grey">Date listed</div>
           <div class="col">
-            {{ date.formatDate(auction?.createdAt, 'MMMM Do, YYYY H:m:s') }}
+            {{ date.formatDate(auction?.createdAt, 'MMMM Do, YYYY HH:mm:ss') }}
           </div>
         </div>
         <div class="row">
