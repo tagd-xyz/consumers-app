@@ -40,6 +40,7 @@ import TabSell from './components/TabSell.vue';
 import TabItem from './components/TabItem.vue';
 import TabDetails from './components/TabDetails.vue';
 import { computed, onMounted, ref } from 'vue';
+import { useQuasar } from 'quasar';
 
 //TODO reuse
 const Tabs = {
@@ -52,13 +53,18 @@ const activeTab = ref(null);
 const router = useRouter();
 const route = useRoute();
 const tagdStore = useTagdStore();
+const $q = useQuasar();
+
+$q.loading.show({
+  delay: 1000,
+});
 
 const isLoading = computed(() => {
   return tagdStore.is.fetching;
 });
 
 const tagd = computed(() => {
-  return tagdStore.single;
+  return tagdStore.data;
 });
 
 // const isActive = computed(() => {
@@ -88,6 +94,8 @@ function onTabClicked(tab) {
 }
 
 onMounted(() => {
-  tagdStore.fetch(tagdId.value);
+  tagdStore.fetch(tagdId.value).finally(() => {
+    $q.loading.hide();
+  });
 });
 </script>
