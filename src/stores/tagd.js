@@ -16,19 +16,23 @@ export const useTagdStore = defineStore('tagd', {
   getters: {},
   actions: {
     fetch(id) {
-      this.single = null;
-      this.is.fetching = true;
-      api
-        .get('tagds/' + id)
-        .then((response) => {
-          this.single = response.data.data;
-        })
-        .catch(() => {
-          this.single = null;
-        })
-        .finally(() => {
-          this.is.fetching = false;
-        });
+      return new Promise((resolve, reject) => {
+        this.data = null;
+        this.is.fetching = true;
+        api
+          .get('tagds/' + id)
+          .then((response) => {
+            this.data = response.data.data;
+            resolve(response);
+          })
+          .catch((error) => {
+            this.data = null;
+            reject(error);
+          })
+          .finally(() => {
+            this.is.fetching = false;
+          });
+      });
     },
     enableForResale(id) {
       this.is.enablingForResale = true;
