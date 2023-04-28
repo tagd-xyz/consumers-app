@@ -5,7 +5,7 @@
     <q-page-container class="q-ma-lg">
       <div class="text-subtitle1 text-bold">Account details</div>
       <div v-if="isFetching" class="text-center">
-        <q-spinner color="primary" size="3em" class="q-ma-lg" />
+        <q-spinner-dots color="primary" size="sm" class="q-ma-lg" />
       </div>
       <div v-else>
         <q-card flat>
@@ -35,7 +35,7 @@
       <div class="text-subtitle1 text-bold q-mt-lg">Approved Resellers</div>
 
       <div v-if="isFetchingAccessRequests" class="text-center">
-        <q-spinner color="primary" size="3em" class="q-ma-lg" />
+        <q-spinner-dots color="primary" size="sm" class="q-ma-lg" />
       </div>
       <div v-else>
         <div v-if="isAccessRequestsEmpty">
