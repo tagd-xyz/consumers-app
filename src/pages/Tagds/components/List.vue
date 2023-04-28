@@ -24,9 +24,17 @@
             <div v-else>No images</div>
             <q-icon
               name="sell"
-              class="absolute-top-left circle-icon bg-primary"
+              class="absolute-top-left circle-icon bg-positive"
               size="xs"
               color="white"
+              v-if="tagd.isAvailableForResale && !tagd.auctions"
+            />
+            <q-icon
+              name="sell"
+              class="absolute-top-left circle-icon bg-available"
+              size="xs"
+              color="white"
+              v-if="tagd.auctions"
             />
           </q-card-section>
           <q-card-section>
