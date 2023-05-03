@@ -19,6 +19,7 @@
             }}
           </div>
           <q-btn
+            unelevated
             class="q-my-sm"
             size="sm"
             color="secondary"
