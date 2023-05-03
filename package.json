@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@capacitor/keyboard": "^4.1.1",
+    "@capacitor/push-notifications": "^4.1.2",
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "firebase": "^9.17.1",

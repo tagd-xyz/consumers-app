@@ -44,6 +44,15 @@ import { useRouter } from 'vue-router';
 import { useQuasar } from 'quasar';
 import Header from './components/Header.vue';
 import List from './components/List.vue';
+// import {
+//   // ActionPerformed,
+//   // PushNotificationSchema,
+//   PushNotifications,
+//   // Token,
+// } from '@capacitor/push-notifications';
+import { Plugins } from 'app/src-capacitor/node_modules/@capacitor/core';
+
+const { PushNotifications } = Plugins;
 
 const $q = useQuasar();
 
@@ -170,6 +179,12 @@ onMounted(() => {
     // initActiveTab();
     $q.loading.hide();
   });
+
+  console.log('will init push notifications');
+  initPushNotifications();
+
+  registerNotifications();
+  getDeliveredNotifications();
 });
 
 function onTagdClicked(tagd) {
@@ -179,5 +194,80 @@ function onTagdClicked(tagd) {
       id: tagd.id,
     },
   });
+}
+
+function initPushNotifications() {
+  console.log('Initializing PushNotifications');
+
+  // Request permission to use push notifications
+  // iOS will prompt user and return if they granted permission or not
+  // Android will just grant without prompting
+  PushNotifications.requestPermissions().then((result) => {
+    if (result.receive === 'granted') {
+      // Register with Apple / Google to receive push via APNS/FCM
+      PushNotifications.register();
+    } else {
+      // Show some error
+    }
+  });
+
+  // On success, we should be able to receive notifications
+  PushNotifications.addListener('registration', (token) => {
+    console.log('Push registration success, token: ' + token.value);
+  });
+
+  // Some issue with our setup and push will not work
+  PushNotifications.addListener('registrationError', (error) => {
+    console.log('Error on registration: ' + JSON.stringify(error));
+  });
+
+  // Show us the notification payload if the app is open on our device
+  PushNotifications.addListener('pushNotificationReceived', (notification) => {
+    console.log('Push received: ' + JSON.stringify(notification));
+  });
+
+  // Method called when tapping on a notification
+  PushNotifications.addListener(
+    'pushNotificationActionPerformed',
+    (notification) => {
+      console.log('Push action performed: ' + JSON.stringify(notification));
+    }
+  );
+}
+
+async function registerNotifications() {
+  PushNotifications.checkPermission()
+    .then((permStatus) => {
+      console.log(permStatus);
+      if (permStatus.receive === 'prompt') {
+        PushNotifications.requestPermissions()
+          .then((permStatus) => {
+            if (permStatus.receive !== 'granted') {
+              throw new Error('User denied permissions!');
+            } else {
+              PushNotifications.register();
+            }
+          })
+          .catch((error) => console.error(error));
+      }
+    })
+    .catch((error) => console.error(error));
+
+  // let permStatus = await PushNotifications.checkPermissions();
+
+  // if (permStatus.receive === 'prompt') {
+  //   permStatus = await PushNotifications.requestPermissions();
+  // }
+
+  // if (permStatus.receive !== 'granted') {
+  //   throw new Error('User denied permissions!');
+  // }
+
+  // await PushNotifications.register();
+}
+
+async function getDeliveredNotifications() {
+  const notificationList = await PushNotifications.getDeliveredNotifications();
+  console.log('delivered notifications', notificationList);
 }
 </script>

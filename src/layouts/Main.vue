@@ -15,7 +15,9 @@
           icon="notifications"
           label="Notifications"
           class="q-mx-lg"
-        />
+        >
+          <!-- <q-badge color="red" floating class="">2</q-badge> -->
+        </q-route-tab>
         <q-route-tab
           no-caps
           to="/account"
