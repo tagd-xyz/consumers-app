@@ -1,31 +1,39 @@
 <template>
   <div>
-    <p class="text-h6 no-margin">Active auctions ({{ auctionsCount }})</p>
+    <p class="text-h6 q-mb-md">Active auctions ({{ auctionsCount }})</p>
 
-    <div class="row" v-for="auction in auctions" :key="auction.id">
-      <div class="col">
-        <img class="logo" :src="auction?.reseller?.logo" alt="" />
-      </div>
-      <div class="col-8">
-        <div class="row">
-          <div class="col text-grey">ID</div>
-          <div class="col">{{ auction?.slug }}</div>
-        </div>
-        <div class="row">
-          <div class="col text-grey">Date listed</div>
-          <div class="col">
-            {{ date.formatDate(auction?.createdAt, 'MMMM Do, YYYY HH:mm:ss') }}
+    <q-card flat v-for="auction in auctions" :key="auction.id" class="q-mb-sm">
+      <q-card-section horizontal class="bg-grey-2">
+        <q-img
+          fit="scale-down"
+          class="col-3 q-ma-sm"
+          :src="auction?.reseller?.logo"
+          alt=""
+        />
+        <q-card-section class="bg-grey-3 full-width">
+          <div class="row">
+            <div class="col-1 text-grey">Id</div>
+            <div class="col text-right text-bold">
+              <span class="">{{ auction?.slug }}</span>
+            </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col text-grey">Reseller</div>
-          <div class="col">{{ auction?.reseller?.name }}</div>
-        </div>
-      </div>
-      <!-- <div class="col text-right">
-        <a href="{{ auction.reseller.website }}" target="_blank"> link </a>
-      </div> -->
-    </div>
+          <div class="row">
+            <div class="col text-grey">Date listed</div>
+            <div class="col text-right text-bold">
+              {{ date.formatDate(auction?.createdAt, 'MMMM Do, YYYY') }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-1 text-grey">Reseller</div>
+            <div class="col text-right text-bold">
+              <span class="ellipsis-1">
+                {{ auction?.reseller?.name }}
+              </span>
+            </div>
+          </div>
+        </q-card-section>
+      </q-card-section>
+    </q-card>
   </div>
 </template>
 
@@ -47,7 +55,11 @@ const auctionsCount = computed(() => {
 </script>
 
 <style scoped>
-.logo {
+/* .logo {
   max-width: 6rem;
+} */
+
+.ellipsis-1 {
+  width: 150px;
 }
 </style>

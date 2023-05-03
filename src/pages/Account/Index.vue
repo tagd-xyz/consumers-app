@@ -32,7 +32,9 @@
         </div>
       </div>
 
-      <div class="text-subtitle1 text-bold q-mt-lg">Approved Resellers</div>
+      <div class="text-subtitle1 text-bold q-mt-lg q-mb-lg">
+        Approved Resellers
+      </div>
 
       <div v-if="isFetchingAccessRequests" class="text-center">
         <q-spinner-dots color="primary" size="sm" class="q-ma-lg" />
