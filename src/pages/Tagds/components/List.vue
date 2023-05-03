@@ -40,7 +40,7 @@
           <q-card-section>
             <div class="text-caption">{{ tagd.item.name }}</div>
             <div
-              class="text-subtitle2 description min-height"
+              class="text-subtitle2 ellipsis-3 min-height"
               v-html="
                 tagd.item.description.replace(/(?:\r\n|\r|\n)/g, '<br />')
               "
@@ -89,11 +89,7 @@ function onTagdClicked(item) {
   min-height: 4rem;
 }
 .description {
-  display: -webkit-box;
   max-width: 200px;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 .circle-icon {
   width: 0.1rem;
