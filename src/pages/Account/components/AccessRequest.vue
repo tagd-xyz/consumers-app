@@ -1,17 +1,26 @@
 <template>
   <div>
-    <q-card flat bordered>
-      <q-card-section horizontal>
-        <q-card-section class="col-5 flex flex-center">
-          <q-img :src="accessRequest.reseller.logo" />
-        </q-card-section>
+    <q-card flat class="q-mb-sm">
+      <q-card-section horizontal class="bg-grey-2">
+        <q-img
+          fit="scale-down"
+          class="col-3 q-ma-sm"
+          :src="accessRequest.reseller.logo"
+          alt=""
+        />
 
-        <q-card-section class="">
-          <div class="text-bold">{{ accessRequest.reseller.name }}</div>
-          <div>{{ accessRequest.approvedAt }}</div>
+        <q-card-section class="bg-grey-3 full-width">
+          <div class="text-bold ellipsis-1">
+            {{ accessRequest.reseller.name }}
+          </div>
+          <div>
+            {{
+              date.formatDate(accessRequest.approvedAt, 'MMMM Do, YYYY hh:mm')
+            }}
+          </div>
           <q-btn
             class="q-my-sm"
-            size="md"
+            size="sm"
             color="secondary"
             @click="onRevokeClick"
             :loading="isRevoking"
@@ -51,6 +60,7 @@
 </template>
 
 <script setup>
+import { date } from 'quasar';
 import { ref, computed } from 'vue';
 import { useAccessRequestStore } from 'stores/accessRequest';
 
