@@ -1,5 +1,5 @@
 <template>
-  <q-btn-group class="q-ma-lg" spread rounded>
+  <q-btn-group class="q-mt-lg q-mx-lg q-mb-sm" spread rounded>
     <q-btn
       no-caps
       rounded
