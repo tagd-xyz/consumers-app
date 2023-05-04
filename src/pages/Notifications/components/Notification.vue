@@ -2,10 +2,14 @@
   <NotificationTagCreated
     v-if="isTagCreatedType"
     :notification="notification"
+    class="fit"
+    @click="onClick(notification)"
   />
   <NotificationAccessRequested
     v-if="isAccessRequestedType"
     :notification="notification"
+    class="fit"
+    @click="onClick(notification)"
   />
 </template>
 
@@ -13,6 +17,8 @@
 import NotificationTagCreated from './NotificationTagCreated.vue';
 import NotificationAccessRequested from './NotificationAccessRequested.vue';
 import { computed } from 'vue';
+
+const emit = defineEmits(['read']);
 
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
@@ -34,4 +40,8 @@ const isAccessRequestedType = computed(() => {
     props.notification.type
   );
 });
+
+function onClick(notification) {
+  emit('read', notification);
+}
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-card flat>
+    <q-card flat :class="notification.isRead ? '' : 'bg-grey-2'">
       <q-card-section>
         <p class="text-subtitle2 no-margin">Reseller Request</p>
         <p class="text-subtitle1 text-bold no-margin">

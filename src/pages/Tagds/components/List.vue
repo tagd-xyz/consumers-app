@@ -12,6 +12,7 @@
         v-for="tagd in tagds"
         :key="tagd.id"
         flat
+        class="q-mb-sm"
         @click="onTagdClicked(tagd)"
       >
         <q-card-section horizontal>
@@ -21,7 +22,7 @@
               class="rounded-borders"
               :src="tagd.item.images[0].thumbnail"
             />
-            <div v-else>No images</div>
+            <div v-else class="">No images</div>
             <q-icon
               name="sell"
               class="absolute-top-left circle-icon bg-positive"
