@@ -1,5 +1,5 @@
 <template>
-  <q-card flat @click="onClick">
+  <q-card flat @click="onClick" :class="notification.isRead ? '' : 'bg-grey-2'">
     <q-card-section>
       <p class="text-subtitle2 no-margin">
         {{ notification?.data?.title }}

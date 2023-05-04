@@ -30,5 +30,19 @@ export const useNotificationsStore = defineStore('notifications', {
           });
       });
     },
+    markAsRead(notificationId) {
+      return new Promise((resolve, reject) => {
+        api
+          .put('notifications/' + notificationId, {
+            isRead: true,
+          })
+          .then((response) => {
+            resolve(response);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
   },
 });
