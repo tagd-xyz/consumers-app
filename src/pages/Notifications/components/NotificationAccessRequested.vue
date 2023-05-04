@@ -55,6 +55,7 @@
           <q-input
             square
             outlined
+            type="number"
             dense
             v-model="digits[0]"
             mask="#"
@@ -62,11 +63,14 @@
             ref="digit1"
             item-aligned
             :disable="!isDigitsEnabled"
+            input-class="digit"
             @update:model-value="onDigit1Change"
+            @focus="onDigit1Focus"
           />
           <q-input
             square
             outlined
+            type="number"
             dense
             v-model="digits[1]"
             mask="#"
@@ -75,10 +79,12 @@
             item-aligned
             :disable="!isDigitsEnabled"
             @update:model-value="onDigit2Change"
+            @focus="onDigit2Focus"
           />
           <q-input
             square
             outlined
+            type="number"
             dense
             v-model="digits[2]"
             mask="#"
@@ -87,10 +93,12 @@
             item-aligned
             :disable="!isDigitsEnabled"
             @update:model-value="onDigit3Change"
+            @focus="onDigit3Focus"
           />
           <q-input
             square
             outlined
+            type="number"
             dense
             v-model="digits[3]"
             mask="#"
@@ -99,10 +107,12 @@
             item-aligned
             :disable="!isDigitsEnabled"
             @update:model-value="onDigit4Change"
+            @focus="onDigit4Focus"
           />
           <q-input
             square
             outlined
+            type="number"
             dense
             v-model="digits[4]"
             mask="#"
@@ -111,10 +121,12 @@
             item-aligned
             :disable="!isDigitsEnabled"
             @update:model-value="onDigit5Change"
+            @focus="onDigit5Focus"
           />
           <q-input
             square
             outlined
+            type="number"
             dense
             v-model="digits[5]"
             mask="#"
@@ -122,6 +134,7 @@
             ref="digit6"
             item-aligned
             :disable="!isDigitsEnabled"
+            @focus="onDigit6Focus"
           />
         </q-card-actions>
 
@@ -292,32 +305,61 @@ function fetchAccessRequest() {
 
 function onDigit1Change() {
   if (digits.value[0]) {
+    digit1.value.blur();
     digit2.value.focus();
   }
 }
 
 function onDigit2Change() {
   if (digits.value[1]) {
+    digit2.value.blur();
     digit3.value.focus();
   }
 }
 
 function onDigit3Change() {
   if (digits.value[2]) {
+    digit3.value.blur();
     digit4.value.focus();
   }
 }
 
 function onDigit4Change() {
   if (digits.value[3]) {
+    digit4.value.blur();
     digit5.value.focus();
   }
 }
 
 function onDigit5Change() {
   if (digits.value[4]) {
+    digit5.value.blur();
     digit6.value.focus();
   }
+}
+
+function onDigit1Focus() {
+  digits.value[0] = null;
+}
+
+function onDigit2Focus() {
+  digits.value[1] = null;
+}
+
+function onDigit3Focus() {
+  digits.value[2] = null;
+}
+
+function onDigit4Focus() {
+  digits.value[3] = null;
+}
+
+function onDigit5Focus() {
+  digits.value[4] = null;
+}
+
+function onDigit6Focus() {
+  digits.value[5] = null;
 }
 
 onMounted(() => {
