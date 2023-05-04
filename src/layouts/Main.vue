@@ -15,7 +15,16 @@
           icon="notifications"
           label="Notifications"
           class="q-mx-lg"
-        />
+        >
+          <q-badge
+            class="q-mr-md q-mt-xs"
+            color="negative"
+            floating
+            v-if="notificationsUnreadCount > 0"
+          >
+            {{ notificationsUnreadCount }}
+          </q-badge>
+        </q-route-tab>
         <q-route-tab
           no-caps
           to="/account"
@@ -27,8 +36,19 @@
   </q-layout>
 </template>
 
-<script>
-export default {};
+<script setup>
+import { useNotificationsStore } from 'stores/notifications';
+const notificationsStore = useNotificationsStore();
+import { computed, onMounted } from 'vue';
+
+const notificationsUnreadCount = computed(() => {
+  return notificationsStore.list.filter((notification) => !notification.isRead)
+    .length;
+});
+
+onMounted(() => {
+  notificationsStore.fetchAll();
+});
 </script>
 
 <style>

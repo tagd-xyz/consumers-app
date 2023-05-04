@@ -6,6 +6,7 @@
         v-for="notification in list"
         :key="notification.id"
         :notification="notification"
+        @read="onRead"
       >
       </Notification>
     </q-page-container>
@@ -22,17 +23,29 @@ import { useQuasar } from 'quasar';
 const $q = useQuasar();
 const store = useNotificationsStore();
 
-$q.loading.show({
-  delay: 1000,
-});
-
 const list = computed(() => {
   return store.list;
 });
 
-onMounted(() => {
+function fetch() {
+  const silently = store.list?.length > 0 ?? false;
+  if (!silently) {
+    $q.loading.show({
+      delay: 1000,
+    });
+  }
   store.fetchAll().finally(() => {
     $q.loading.hide();
   });
+}
+
+function onRead(notification) {
+  store.markAsRead(notification.id).finally(() => {
+    fetch();
+  });
+}
+
+onMounted(() => {
+  fetch();
 });
 </script>

@@ -5,14 +5,14 @@
         <q-toolbar-title class="absolute-center text-subtitle2">
           {{ title }}
         </q-toolbar-title>
-        <q-btn
+        <!-- <q-btn
           no-caps
           outline
           dense
           size="small"
           label="Clear"
           class="absolute-right q-ma-sm q-px-sm"
-        />
+        /> -->
       </q-toolbar>
     </q-header>
   </div>
