@@ -1,6 +1,7 @@
 const routes = [
   {
     path: '/',
+    redirect: { name: 'tagds' },
     component: () => import('layouts/Main.vue'),
     meta: {
       requiresAuth: true,
