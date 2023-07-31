@@ -14,9 +14,9 @@ import { auth, authUI } from 'boot/firebase';
 import { useRouter } from 'vue-router';
 import LogoComponent from 'components/LogoComponent.vue';
 import DebugInfo from './components/DebugInfo.vue';
-import { Plugins } from 'app/src-capacitor/node_modules/@capacitor/core';
+// import { Plugins } from 'app/src-capacitor/node_modules/@capacitor/core';
 
-const { Keyboard } = Plugins;
+// const { Keyboard } = Plugins;
 
 const router = useRouter();
 
@@ -26,13 +26,13 @@ const isDebugEnabled = computed(() => {
   return process.env.DEBUG_ENABLED ?? false;
 });
 
-Keyboard.addListener('keyboardDidShow', () => {
-  isKeyboardVisible.value = true;
-});
+// Keyboard.addListener('keyboardDidShow', () => {
+//   isKeyboardVisible.value = true;
+// });
 
-Keyboard.addListener('keyboardDidHide', () => {
-  isKeyboardVisible.value = false;
-});
+// Keyboard.addListener('keyboardDidHide', () => {
+//   isKeyboardVisible.value = false;
+// });
 
 onMounted(() => {
   const config = {
