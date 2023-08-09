@@ -6,6 +6,7 @@
       :options="orderOptions"
       label="Sort by"
       @update:model-value="onOrderChange()"
+      options-dense
     />
     <q-select
       v-model="type"
@@ -13,6 +14,8 @@
       multiple
       label="Filter by Category"
       @update:model-value="onTypeChange()"
+      :disable="!typeOptions.length"
+      options-dense
     />
     <q-select
       v-model="retailer"
@@ -20,6 +23,7 @@
       multiple
       label="Filter by Retailer"
       @update:model-value="onRetailerChange()"
+      options-dense
     />
     <q-select
       v-model="brand"
@@ -27,6 +31,7 @@
       multiple
       label="Filter by Brand"
       @update:model-value="onBrandChange()"
+      options-dense
     />
     <q-separator class="q-my-lg" />
 
@@ -70,13 +75,6 @@ const orderOptions = computed(() => {
   });
 });
 
-const typeOptions = computed(() => {
-  const options = uiStore.filtering.type.options;
-  return Object.keys(options).map(function (key) {
-    return options[key];
-  });
-});
-
 const resaleOptions = computed(() => {
   const options = uiStore.filtering.resale.options;
   return Object.keys(options).map(function (key) {
@@ -101,6 +99,14 @@ const brandOptions = computed(() => {
 
 const brandsAvailable = computed(() => {
   return tagdsStore.brands;
+});
+
+const typeOptions = computed(() => {
+  return uiStore.filtering.type.options;
+});
+
+const typesAvailable = computed(() => {
+  return tagdsStore.types;
 });
 
 const order = ref(uiStore.filtering.order.selected);
@@ -146,6 +152,21 @@ watch(retailersAvailable, () => {
 watch(brandsAvailable, () => {
   uiStore.setFilteringBrandOptions(brandsAvailable.value);
   brand.value = brandsAvailable.value;
+});
+
+watch(typesAvailable, () => {
+  uiStore.setFilteringTypeOptions(typesAvailable.value.map((type) => {
+    return {
+      label: type.name,
+      value: type.id,
+    };
+  }));
+  type.value = typesAvailable.value.map((type) => {
+    return {
+      label: type.name,
+      value: type.id,
+    };
+  });
 });
 </script>
 

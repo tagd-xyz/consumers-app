@@ -7,6 +7,8 @@
       </q-badge>
     </p>
     <p>
+      <span class="text-grey"> {{ tagd?.item?.type?.name }} </span>
+      <br>
       <span class="text-grey"> Tag </span>
       <span class="text-overline">{{ tagd?.slug }}</span>
     </p>
@@ -18,7 +20,7 @@
       </div>
       <div class="col">
         <p class="text-grey no-margin">Category</p>
-        <p>{{ tagd?.item.type ?? 'Unknown' }}</p>
+        <p>{{ tagd?.item.type?.name ?? 'Unknown' }}</p>
       </div>
     </div>
     <div class="row">
