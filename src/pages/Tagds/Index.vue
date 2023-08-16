@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <Header
       :is-loading="isLoading"
       @update="onHeaderUpdate"
@@ -125,10 +126,12 @@ function sortItems(items) {
 }
 
 function filterItemsByFilters(items) {
-  const types = uiStore.filtering.type.selected;
+  const types = uiStore.filtering.type.selected.map((type) => type?.value);
   const retailers = uiStore.filtering.retailer.selected;
   const availableFilter = uiStore.filtering.resale.available;
   const listedFilter = uiStore.filtering.resale.listed;
+
+  // console.log(types, typesValues);
 
   return items.filter(function (item) {
     const passAvailableFilter =
@@ -143,7 +146,7 @@ function filterItemsByFilters(items) {
       (!listedFilter && !isListed);
 
     return (
-      types?.includes(item.item.type) &&
+      types?.includes(item.item?.type?.id) &&
       retailers?.includes(item.item.retailer) &&
       passAvailableFilter &&
       passListedFilter

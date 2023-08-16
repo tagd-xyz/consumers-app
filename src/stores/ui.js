@@ -7,11 +7,6 @@ const filteringOrderOptions = {
   retailersAvailable: [],
 };
 
-const filteringTypeOptions = {
-  fashion: 'fashion',
-  sneakers: 'sneakers',
-};
-
 const filteringResaleOptions = {
   all: null,
   yes: true,
@@ -28,11 +23,8 @@ export const useUiStore = defineStore('ui', {
           selected: filteringOrderOptions.purchaseDate,
         },
         type: {
-          options: filteringTypeOptions,
-          selected: [
-            filteringTypeOptions.fashion,
-            filteringTypeOptions.sneakers,
-          ],
+          options: [],
+          selected: [],
         },
         retailer: {
           options: [],
@@ -47,6 +39,9 @@ export const useUiStore = defineStore('ui', {
           available: filteringResaleOptions.all,
           listed: filteringResaleOptions.all,
         },
+      },
+      is: {
+        fetchingItemTypes: false,
       },
     };
   },
@@ -77,6 +72,10 @@ export const useUiStore = defineStore('ui', {
     setFilteringBrandOptions(list) {
       this.filtering.brand.options = list;
       this.filtering.brand.selected = list;
+    },
+    setFilteringTypeOptions(list) {
+      this.filtering.type.options = list;
+      this.filtering.type.selected = list;
     },
   },
 });

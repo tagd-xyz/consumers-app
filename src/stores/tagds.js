@@ -30,6 +30,15 @@ export const useTagdsStore = defineStore('tagds', {
         ),
       ];
     },
+    types() {
+      return [
+        ...new Set(
+          this.list.map((tagd) => {
+            return tagd.item.type;
+          })
+        ),
+      ];
+    },
   },
   actions: {
     fetchAll() {
