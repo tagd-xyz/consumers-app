@@ -30,7 +30,6 @@
           no-caps
           rounded
           label="Inactive"
-          :disabled="isLoading || 0 == inactiveCount"
           :text-color="Tabs.Inactive == activeTab ? 'primary' : ''"
           @click="setActive(Tabs.Inactive)"
         >
@@ -42,7 +41,6 @@
           no-caps
           rounded
           label="Active"
-          :disabled="isLoading || 0 == activeCount"
           :text-color="Tabs.Active == activeTab ? 'primary' : ''"
           @click="setActive(Tabs.Active)"
         >
@@ -54,7 +52,6 @@
           no-caps
           rounded
           label="Historic"
-          :disabled="isLoading || 0 == historicCount"
           :text-color="Tabs.Historic == activeTab ? 'primary' : ''"
           @click="setActive(Tabs.Historic)"
         >
@@ -87,7 +84,7 @@ const Tabs = {
 
 const rightDrawerOpen = ref(false);
 const searchText = ref('');
-const activeTab = ref(null);
+const activeTab = ref(Tabs.Active);
 
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
@@ -104,10 +101,6 @@ const props = defineProps({
     default: null,
   },
   historicCount: {
-    type: Number,
-    default: null,
-  },
-  initialTab: {
     type: Number,
     default: null,
   },
@@ -128,10 +121,7 @@ function setActive(button) {
   emit('update', button);
 }
 
-onMounted(() => {
-  activeTab.value = props.initialTab;
-  // activeTab.value = Tabs.Active;
-});
+onMounted(() => {});
 </script>
 
 <style scoped>
