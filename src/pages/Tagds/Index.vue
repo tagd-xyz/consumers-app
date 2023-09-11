@@ -131,8 +131,6 @@ function filterItemsByFilters(items) {
   const availableFilter = uiStore.filtering.resale.available;
   const listedFilter = uiStore.filtering.resale.listed;
 
-  // console.log(types, typesValues);
-
   return items.filter(function (item) {
     const passAvailableFilter =
       null == availableFilter ||
@@ -155,7 +153,6 @@ function filterItemsByFilters(items) {
 }
 
 function onHeaderUpdate(tab) {
-  console.log('onHeaderUpdate', tab);
   activeTab.value = tab;
 }
 
@@ -181,7 +178,6 @@ function initActiveTab() {
 
 onMounted(() => {
   tagdsStore.fetchAll().finally(() => {
-    console.log('finally loaded');
     initActiveTab();
     $q.loading.hide();
   });
