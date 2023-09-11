@@ -77,7 +77,7 @@
 </template>
 
 <script setup>
-import { watch, ref } from 'vue';
+import { watch, onMounted, ref } from 'vue';
 import ItemsFilterComponent from 'src/components/ItemsFilterComponent.vue';
 const Tabs = {
   Inactive: 1,
@@ -87,7 +87,7 @@ const Tabs = {
 
 const rightDrawerOpen = ref(false);
 const searchText = ref('');
-const activeTab = ref(Tabs.Inactive);
+const activeTab = ref(null);
 
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
@@ -107,6 +107,10 @@ const props = defineProps({
     type: Number,
     default: null,
   },
+  initialTab: {
+    type: Number,
+    default: null,
+  },
 });
 
 const emit = defineEmits(['update', 'search']);
@@ -123,6 +127,11 @@ function setActive(button) {
   activeTab.value = button;
   emit('update', button);
 }
+
+onMounted(() => {
+  activeTab.value = props.initialTab;
+  // activeTab.value = Tabs.Active;
+});
 </script>
 
 <style scoped>
