@@ -7,8 +7,6 @@
       </q-badge>
     </p>
     <p>
-      <span class="text-grey"> {{ tagd?.item?.type?.name }} </span>
-      <br>
       <span class="text-grey"> Tag </span>
       <span class="text-overline">{{ tagd?.slug }}</span>
     </p>
