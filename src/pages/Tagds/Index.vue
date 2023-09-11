@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <Header
       :is-loading="isLoading"
       @update="onHeaderUpdate"
@@ -8,6 +7,7 @@
       :inactive-count="listInactive.length"
       :active-count="listActive.length"
       :historic-count="listHistoric.length"
+      :initial-tab="initialTab"
     />
     <q-tab-panels v-model="activeTab" animated>
       <q-tab-panel :name="Tabs.Inactive">
@@ -155,6 +155,7 @@ function filterItemsByFilters(items) {
 }
 
 function onHeaderUpdate(tab) {
+  console.log('onHeaderUpdate', tab);
   activeTab.value = tab;
 }
 
@@ -162,15 +163,26 @@ function onHeaderSearch(text) {
   searchText.value = text.trim();
 }
 
-// function initActiveTab() {
-//   console.log('initActiveTab');
-//   activeTab.value = Tabs.Active;
-//   console.log(activeTab.value);
-// }
+const initialTab = computed(() => {
+  if (listActive.value.length > 0) {
+    return Tabs.Active;
+  } else if (listInactive.value.length > 0) {
+    return Tabs.Inactive;
+  } else if (listHistoric.value.length > 0) {
+    return Tabs.Historic;
+  } else {
+    return Tabs.Active;
+  }
+});
+
+function initActiveTab() {
+  activeTab.value = initialTab.value;
+}
 
 onMounted(() => {
   tagdsStore.fetchAll().finally(() => {
-    // initActiveTab();
+    console.log('finally loaded');
+    initActiveTab();
     $q.loading.hide();
   });
 });
