@@ -7,7 +7,6 @@
       :inactive-count="listInactive.length"
       :active-count="listActive.length"
       :historic-count="listHistoric.length"
-      :initial-tab="initialTab"
     />
     <q-tab-panels v-model="activeTab" animated>
       <q-tab-panel :name="Tabs.Inactive">
@@ -131,8 +130,6 @@ function filterItemsByFilters(items) {
   const availableFilter = uiStore.filtering.resale.available;
   const listedFilter = uiStore.filtering.resale.listed;
 
-  // console.log(types, typesValues);
-
   return items.filter(function (item) {
     const passAvailableFilter =
       null == availableFilter ||
@@ -155,7 +152,6 @@ function filterItemsByFilters(items) {
 }
 
 function onHeaderUpdate(tab) {
-  console.log('onHeaderUpdate', tab);
   activeTab.value = tab;
 }
 
@@ -163,26 +159,8 @@ function onHeaderSearch(text) {
   searchText.value = text.trim();
 }
 
-const initialTab = computed(() => {
-  if (listActive.value.length > 0) {
-    return Tabs.Active;
-  } else if (listInactive.value.length > 0) {
-    return Tabs.Inactive;
-  } else if (listHistoric.value.length > 0) {
-    return Tabs.Historic;
-  } else {
-    return Tabs.Active;
-  }
-});
-
-function initActiveTab() {
-  activeTab.value = initialTab.value;
-}
-
 onMounted(() => {
   tagdsStore.fetchAll().finally(() => {
-    console.log('finally loaded');
-    initActiveTab();
     $q.loading.hide();
   });
 });

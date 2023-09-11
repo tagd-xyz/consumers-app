@@ -91,6 +91,5 @@ function onConfirmClick() {
   accessRequestStore.reject(props.accessRequest.id).then(() => {
     emit('revoked');
   });
-  console.log('will revoke');
 }
 </script>
