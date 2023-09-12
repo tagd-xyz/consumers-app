@@ -155,7 +155,8 @@ watch(brandsAvailable, () => {
 });
 
 watch(typesAvailable, () => {
-  uiStore.setFilteringTypeOptions(typesAvailable.value.map((type) => {
+  uiStore.setFilteringTypeOptions(
+    typesAvailable.value.map((type) => {
     return {
       label: type.name,
       value: type.id,

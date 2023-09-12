@@ -3,9 +3,7 @@
     <template v-slot:avatar>
       <q-icon name="signal_wifi_off" color="white" />
     </template>
-    <div class="text-white">
-      You have lost connection to the internet.
-    </div>
+    <div class="text-white">You have lost connection to the internet.</div>
   </q-banner>
 </template>
 
