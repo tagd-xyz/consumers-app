@@ -20,7 +20,7 @@
           <div class="row">
             <div class="col text-grey">Date listed</div>
             <div class="col text-right text-bold">
-              {{ date.formatDate(auction?.createdAt, 'MMMM Do, YYYY') }}
+              {{ date.formatDate(auction?.createdAt, 'MMM Do, YYYY') }}
             </div>
           </div>
           <div class="row">
