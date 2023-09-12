@@ -87,7 +87,7 @@ function toggleFullscreen() {
 
 onMounted(() => {
   if (props.images.length > 0) {
-    slide.value = 1;
+    slide.value = props.images[0].id;
   }
 });
 </script>
