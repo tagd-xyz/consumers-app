@@ -10,26 +10,40 @@
       <div class="text-h4" style="opacity: 0.4">We have a little problem.</div>
 
       <div class="text-h6 q-ma-xl" style="opacity: 0.4">
-        We detected a network error.Please make sure you are connected to the
-        internet and wait a few minutes before you try again.
+        Our servers are currently down, please wait a few minutes.
       </div>
 
       <q-btn
         color="white"
         text-color="primary"
         unelevated
-        to="/"
-        label="Retry"
-        no-caps
+        label="Check"
+        @click="check"
+        :loading="isChecking"
       />
     </div>
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue';
+<script setup>
+import { useNetworkStore } from 'stores/network';
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
 
-export default defineComponent({
-  name: 'ErrorNetwork',
-});
+const store = useNetworkStore();
+const router = useRouter();
+
+const isChecking = ref(false);
+
+function check() {
+  isChecking.value = true;
+  store
+    .fetchApiStatus()
+    .then(() => {
+      router.push('/');
+    })
+    .finally(() => {
+      isChecking.value = false;
+    });
+}
 </script>
