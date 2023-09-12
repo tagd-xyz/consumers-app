@@ -1,6 +1,7 @@
 import { boot } from 'quasar/wrappers';
 import axios from 'axios';
 import { useAuthStore } from 'stores/auth';
+import { auth } from 'boot/firebase';
 
 const store = useAuthStore();
 
@@ -12,13 +13,33 @@ const store = useAuthStore();
 // for each client)
 const api = axios.create({ baseURL: process.env.API_URL });
 
-export default boot(() => {
+export default boot(({ router }) => {
   /** { app } */
   api.interceptors.request.use(async (req) => {
     const { token } = store;
     req.headers.Authorization = `Bearer ${token}`;
     return req;
   });
+
+  api.interceptors.response.use(
+    (response) => {
+      return response;
+    },
+    (error) => {
+      switch (error.response.status) {
+        case 401:
+        // case 403:
+          auth.signOut().then(() => {
+            router.push({ name: 'signIn' });
+          });
+          break;
+        default:
+          //do nothing
+          break;
+      }
+      return Promise.reject(error);
+    }
+  );
   // for use inside Vue files (Options API) through this.$axios and this.$api
 
   // app.config.globalProperties.$axios = axios

@@ -1,6 +1,7 @@
 <template>
   <div>
     <q-header class="bg-white text-black" height-hint="98">
+      <offline-banner-component />
       <q-toolbar>
         <q-toolbar-title class="q-my-lg q-mx-md">
           <q-input
@@ -76,6 +77,7 @@
 <script setup>
 import { watch, onMounted, ref } from 'vue';
 import ItemsFilterComponent from 'src/components/ItemsFilterComponent.vue';
+import OfflineBannerComponent from 'components/OfflineBannerComponent.vue';
 const Tabs = {
   Inactive: 1,
   Active: 2,
