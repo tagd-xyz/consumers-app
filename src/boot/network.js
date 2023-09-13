@@ -28,13 +28,15 @@ export default boot(({ router }) => {
 });
 
 function check() {
-  store.fetchApiStatus()
-    .then(() => {
-      isApiOk.value = true;
-    })
-    .catch(() => {
-      isApiOk.value = false;
-    });
+  if (!store.isNetworkDown) {
+    store.fetchApiStatus()
+      .then(() => {
+        isApiOk.value = true;
+      })
+      .catch(() => {
+        isApiOk.value = false;
+      });
+  }
 }
 
 watch(isApiOk, () => {

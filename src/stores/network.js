@@ -21,7 +21,7 @@ export const useNetworkStore = defineStore('network', {
       return null!=this.is.networkOk && !this.is.networkOk;
     },
     isApiDown() {
-      return null!==this.is.apiOk && !this.is.apiOk;
+      return !this.isNetworkDown && null!==this.is.apiOk && !this.is.apiOk;
     },
   },
   actions: {
