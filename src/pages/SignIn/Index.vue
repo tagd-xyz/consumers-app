@@ -1,5 +1,6 @@
 <template>
   <q-page class="flex flex-center row">
+    <OfflineBannerComponent class="offline-banner" />
     <logo-component class="q-ma-lg" v-if="!isKeyboardVisible" />
     <div id="firebaseui-auth-container"></div>
     <debug-info class="fixed-top-right" v-if="isDebugEnabled" />
@@ -14,6 +15,7 @@ import { auth, authUI } from 'boot/firebase';
 import { useRouter } from 'vue-router';
 import LogoComponent from 'components/LogoComponent.vue';
 import DebugInfo from './components/DebugInfo.vue';
+import OfflineBannerComponent from 'components/OfflineBannerComponent.vue';
 // import { Plugins } from 'app/src-capacitor/node_modules/@capacitor/core';
 
 // const { Keyboard } = Plugins;
@@ -60,3 +62,12 @@ onMounted(() => {
   });
 });
 </script>
+
+<style scoped>
+.offline-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+</style>
