@@ -31,12 +31,17 @@ export const useTagdsStore = defineStore('tagds', {
       ];
     },
     types() {
+      const names = new Set();
+      const set = [];
+      this.list.forEach((tagd) => {
+        if (!names.has(tagd.item.type.name)) {
+          set.push(tagd.item.type);
+        }
+        names.add(tagd.item.type.name);
+      });
+
       return [
-        ...new Set(
-          this.list.map((tagd) => {
-            return tagd.item.type;
-          })
-        ),
+        ...set,
       ];
     },
   },
