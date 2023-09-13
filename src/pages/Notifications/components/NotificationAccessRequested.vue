@@ -36,7 +36,12 @@
         <q-card-section
           class="row items-center justify-center text-center q-mt-sm"
         >
-          <img :src="logo" class="reseller-logo" alt="reseller logo" />
+          <img
+            v-if="logo"
+            :src="logo"
+            class="reseller-logo"
+            alt="reseller logo"
+          />
         </q-card-section>
         <q-card-section class="row items-center justify-center text-center">
           <!-- <div>Reseller Request</div> -->
