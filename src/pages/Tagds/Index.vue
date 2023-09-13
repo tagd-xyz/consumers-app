@@ -112,19 +112,36 @@ function sortItems(items) {
   return items.sort(function (a, b) {
     switch (uiStore.filtering.order.selected) {
       case uiStore.filtering.order.options.tag:
-        return a.slug - b.slug;
-
+        if (a.slug < b.slug) {
+          return -1;
+        } else if (a.slug > b.slug) {
+          return 1;
+        } else {
+          return 0;
+        }
       case uiStore.filtering.order.options.retailer:
-        return a.item.retailer - b.item.retailer;
-
+        if (a.item.retailer < b.item.retailer) {
+          return -1;
+        } else if (a.item.retailer > b.item.retailer) {
+          return 1;
+        } else {
+          return 0;
+        }
       case uiStore.filtering.order.options.purchaseDate:
       default:
-        return a.createdAt - b.createdAt;
+        if (a.createdAt < b.createdAt) {
+          return -1;
+        } else if (a.createdAt > b.createdAt) {
+          return 1;
+        } else {
+          return 0;
+        }
     }
   });
 }
 
 function filterItemsByFilters(items) {
+  const brands = uiStore.filtering.brand.selected.map((brand) => brand);
   const types = uiStore.filtering.type.selected.map((type) => type?.value);
   const retailers = uiStore.filtering.retailer.selected;
   const availableFilter = uiStore.filtering.resale.available;
@@ -136,7 +153,7 @@ function filterItemsByFilters(items) {
       (availableFilter && item.isAvailableForResale) ||
       (!availableFilter && !item.isAvailableForResale);
 
-    const isListed = false; //item.tagd.auctions?.length;
+    const isListed = item.auctions?.length;
     const passListedFilter =
       null == listedFilter ||
       (listedFilter && isListed) ||
@@ -145,6 +162,7 @@ function filterItemsByFilters(items) {
     return (
       types?.includes(item.item?.type?.id) &&
       retailers?.includes(item.item.retailer) &&
+      brands?.includes(item.item.properties?.brand) &&
       passAvailableFilter &&
       passListedFilter
     );
