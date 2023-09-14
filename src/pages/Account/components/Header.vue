@@ -1,6 +1,7 @@
 <template>
   <div>
-    <q-header class="bg-white text-black q-pt-md" height-hint="98">
+    <q-header class="bg-white text-black" height-hint="98">
+      <offline-banner-component />
       <q-toolbar>
         <q-toolbar-title class="absolute-center text-subtitle2">
           {{ title }}
@@ -25,6 +26,8 @@ export default {
 </script> -->
 
 <script setup>
+import OfflineBannerComponent from 'components/OfflineBannerComponent.vue';
+
 // eslint-disable-next-line no-unused-vars
 const props = defineProps({
   title: {
