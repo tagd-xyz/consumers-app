@@ -33,11 +33,6 @@
     </q-card>
     <q-dialog v-model="showDialog" persistent>
       <q-card>
-        <q-card-section
-          class="row items-center justify-center text-center q-mt-sm"
-        >
-          <img :src="logo" class="reseller-logo" alt="reseller logo" />
-        </q-card-section>
         <q-card-section class="row items-center justify-center text-center">
           <!-- <div>Reseller Request</div> -->
           <span class="q-mx-lg text-h6">
@@ -54,87 +49,15 @@
         <q-card-actions class="justify-center">
           <q-input
             square
-            outlined
-            type="number"
-            dense
-            v-model="digits[0]"
-            mask="#"
-            class="digit q-pa-none q-pr-sm"
-            ref="digit1"
+            borderless
+            v-model="code"
+            mask="######"
+            class="digits"
             item-aligned
             :disable="!isDigitsEnabled"
-            input-class="digit"
-            @update:model-value="onDigit1Change"
-            @focus="onDigit1Focus"
-          />
-          <q-input
-            square
-            outlined
-            type="number"
-            dense
-            v-model="digits[1]"
-            mask="#"
-            class="digit q-pa-none q-pr-sm"
-            ref="digit2"
-            item-aligned
-            :disable="!isDigitsEnabled"
-            @update:model-value="onDigit2Change"
-            @focus="onDigit2Focus"
-          />
-          <q-input
-            square
-            outlined
-            type="number"
-            dense
-            v-model="digits[2]"
-            mask="#"
-            class="digit q-pa-none q-pr-sm"
-            ref="digit3"
-            item-aligned
-            :disable="!isDigitsEnabled"
-            @update:model-value="onDigit3Change"
-            @focus="onDigit3Focus"
-          />
-          <q-input
-            square
-            outlined
-            type="number"
-            dense
-            v-model="digits[3]"
-            mask="#"
-            class="digit q-pa-none q-pr-sm"
-            ref="digit4"
-            item-aligned
-            :disable="!isDigitsEnabled"
-            @update:model-value="onDigit4Change"
-            @focus="onDigit4Focus"
-          />
-          <q-input
-            square
-            outlined
-            type="number"
-            dense
-            v-model="digits[4]"
-            mask="#"
-            class="digit q-pa-none q-pr-sm"
-            ref="digit5"
-            item-aligned
-            :disable="!isDigitsEnabled"
-            @update:model-value="onDigit5Change"
-            @focus="onDigit5Focus"
-          />
-          <q-input
-            square
-            outlined
-            type="number"
-            dense
-            v-model="digits[5]"
-            mask="#"
-            class="digit q-pa-none q-pr-sm"
-            ref="digit6"
-            item-aligned
-            :disable="!isDigitsEnabled"
-            @focus="onDigit6Focus"
+            bg-color="grey-3"
+            placeholder=""
+            input-style="text-align: center;letter-spacing:0.2em;"
           />
         </q-card-actions>
 
@@ -172,13 +95,7 @@ import { useAccessRequestStore } from 'src/stores/accessRequest';
 
 const accessRequestsStore = useAccessRequestStore();
 
-const digits = ref(['', '', '', '', '', '']);
-const digit1 = ref(null);
-const digit2 = ref(null);
-const digit3 = ref(null);
-const digit4 = ref(null);
-const digit5 = ref(null);
-const digit6 = ref(null);
+const code = ref('');
 const errorMessage = ref(null);
 const accessRequest = ref(null);
 const showDialog = ref(false);
@@ -190,16 +107,8 @@ const props = defineProps({
   },
 });
 
-const logo = computed(() => {
-  return props.notification?.data?.logo;
-});
-
 const reseller = computed(() => {
   return props.notification?.data?.reseller;
-});
-
-const code = computed(() => {
-  return digits.value.join('');
 });
 
 const accessRequestId = computed(() => {
@@ -235,11 +144,7 @@ const isCodeEmpty = computed(() => {
 });
 
 const isApproveEnabled = computed(() => {
-  return (
-    !isApproving.value &&
-    !isRejecting.value &&
-    digits.value.length == code.value.length
-  );
+  return !isApproving.value && !isRejecting.value && code.value.length === 6;
 });
 
 const isRejectEnabled = computed(() => {
@@ -285,7 +190,7 @@ function onAccept() {
     })
     .catch(() => {
       setErrorMessage('Please check the auth code with the reseller');
-      digits.value = ['', '', '', '', ''];
+      code.value = '';
     })
     .finally(() => {
       fetchAccessRequest();
@@ -303,65 +208,6 @@ function fetchAccessRequest() {
     });
 }
 
-function onDigit1Change() {
-  if (digits.value[0]) {
-    digit1.value.blur();
-    digit2.value.focus();
-  }
-}
-
-function onDigit2Change() {
-  if (digits.value[1]) {
-    digit2.value.blur();
-    digit3.value.focus();
-  }
-}
-
-function onDigit3Change() {
-  if (digits.value[2]) {
-    digit3.value.blur();
-    digit4.value.focus();
-  }
-}
-
-function onDigit4Change() {
-  if (digits.value[3]) {
-    digit4.value.blur();
-    digit5.value.focus();
-  }
-}
-
-function onDigit5Change() {
-  if (digits.value[4]) {
-    digit5.value.blur();
-    digit6.value.focus();
-  }
-}
-
-function onDigit1Focus() {
-  digits.value[0] = null;
-}
-
-function onDigit2Focus() {
-  digits.value[1] = null;
-}
-
-function onDigit3Focus() {
-  digits.value[2] = null;
-}
-
-function onDigit4Focus() {
-  digits.value[3] = null;
-}
-
-function onDigit5Focus() {
-  digits.value[4] = null;
-}
-
-function onDigit6Focus() {
-  digits.value[5] = null;
-}
-
 onMounted(() => {
   fetchAccessRequest();
 });
@@ -369,9 +215,13 @@ onMounted(() => {
 
 <style scoped>
 .reseller-logo {
-  max-width: 5rem;
+  max-width: 3rem;
 }
-.digit {
-  width: 2.5rem;
+.digits {
+  font-size: xx-large;
+  /* font-family: 'Courier New', Courier, monospace; */
+  font-weight: bold;
+  letter-spacing: 1em;
+  width: 75%;
 }
 </style>
