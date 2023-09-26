@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="text-h6 no-margin">Transfer your Tag</p>
+    <p class="text-h6 no-margin">Transfer your Digital ID</p>
     <p>
       Does this item now belong to someone else?
       <br />

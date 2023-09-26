@@ -8,7 +8,7 @@
         {{ notification?.data?.tagd?.item?.name }}
       </p>
       <p class="text-subtitle2 no-margin">
-        <span class="text-grey">Tag </span>
+        <span class="text-grey">Digital ID </span>
         {{ notification?.data?.tagd?.slug }}
       </p>
       <p class="text-subtitle2 no-margin">

@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col">
-        <p class="text-grey no-margin">Tag</p>
+        <p class="text-grey no-margin">Digital ID</p>
       </div>
       <div class="col">
         <p>{{ tagd.slug }}</p>

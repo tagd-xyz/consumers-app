@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 
 const filteringOrderOptions = {
   purchaseDate: 'Purchase Date',
-  tag: 'Tag',
+  tag: 'Digital ID',
   retailer: 'Retailer',
   retailersAvailable: [],
 };
