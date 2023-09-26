@@ -3,7 +3,6 @@
     <div v-if="isActive">
       <SellEnable v-if="!isAvailableForResale" :tagd="tagd" />
       <SellEnabled v-if="isAvailableForResale && !hasAuctions" :tagd="tagd" />
-      <SellTransfer v-if="isAvailableForResale && !hasAuctions" :tagd="tagd" />
       <SellAuctions
         v-if="isAvailableForResale && hasAuctions"
         :auctions="tagd.auctions"
@@ -19,7 +18,6 @@
 <script setup>
 import SellEnable from './TabSellEnable.vue';
 import SellEnabled from './TabSellEnabled.vue';
-import SellTransfer from './TabSellTransfer.vue';
 import SellAuctions from './TabSellAuctions.vue';
 import { computed } from 'vue';
 
