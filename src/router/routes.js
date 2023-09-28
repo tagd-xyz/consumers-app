@@ -23,8 +23,6 @@ const routes = [
         path: 'account',
         component: () => import('src/pages/Account/Index.vue'),
       },
-      // { name: 'resellerVerification', path: 'reseller-verification', component: () => import('pages/ResellerVerificationPage.vue') },
-      // { name: 'giftTag', path: 'gift-tag', component: () => import('pages/GiftTagPage.vue') },
     ],
   },
   {

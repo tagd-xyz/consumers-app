@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center row">
     <OfflineBannerComponent class="offline-banner" />
-    <logo-component class="q-ma-lg" v-if="!isKeyboardVisible" />
+    <logo-component class="q-mt-lg" v-if="!isKeyboardVisible" />
     <div id="firebaseui-auth-container"></div>
     <debug-info class="fixed-top-right" v-if="isDebugEnabled" />
   </q-page>

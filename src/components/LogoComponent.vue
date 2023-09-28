@@ -25,6 +25,6 @@ const props = defineProps({
 
 <style scoped>
 .tagd-logo {
-  /* height: 24px; */
+  height: 7rem;
 }
 </style>
