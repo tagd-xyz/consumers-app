@@ -28,7 +28,7 @@ export default boot(({ router }) => {
     (error) => {
       switch (error.response.status) {
         case 401:
-        // case 403:
+        case 403:
           auth.signOut().then(() => {
             router.push({ name: 'signIn' });
           });
