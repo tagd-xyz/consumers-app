@@ -7,7 +7,7 @@
       </q-badge>
     </p>
     <p>
-      <span class="text-grey"> Digital ID</span>
+      <span class="text-grey">Digital ID&nbsp;</span>
       <span class="text-overline">{{ tagd?.slug }}</span>
     </p>
     <p v-html="tagd?.item.description.replace(/(?:\r\n|\r|\n)/g, '<br />')" />
