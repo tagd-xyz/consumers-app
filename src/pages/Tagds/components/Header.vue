@@ -4,71 +4,37 @@
       <offline-banner-component />
       <q-toolbar>
         <q-toolbar-title class="q-my-lg q-mx-md">
-          <q-input
-            :disable="isLoading"
-            outlined
-            dense
-            v-model="searchText"
-            label="Search"
-          >
+          <q-input :disable="isLoading" outlined dense v-model="searchText" label="Search">
             <template v-slot:prepend>
               <q-icon name="search" color="grey" />
             </template>
           </q-input>
         </q-toolbar-title>
 
-        <q-btn
-          dense
-          flat
-          round
-          :disabled="isLoading"
-          icon="filter_list"
-          @click="toggleRightDrawer"
-        />
+        <q-btn dense flat round :disabled="isLoading" icon="filter_list" @click="toggleRightDrawer" />
       </q-toolbar>
       <q-btn-group class="q-mx-lg" spread rounded>
-        <q-btn
-          no-caps
-          rounded
-          label="Inactive"
-          :text-color="Tabs.Inactive == activeTab ? 'primary' : ''"
-          @click="setActive(Tabs.Inactive)"
-        >
+        <q-btn no-caps rounded label="Inactive" :text-color="Tabs.Inactive == activeTab ? 'primary' : ''"
+          @click="setActive(Tabs.Inactive)">
           <!-- <q-badge color="orange" floating transparent v-if="inactiveCount > 0">
             {{ inactiveCount }}
           </q-badge> -->
         </q-btn>
-        <q-btn
-          no-caps
-          rounded
-          label="Active"
-          :text-color="Tabs.Active == activeTab ? 'primary' : ''"
-          @click="setActive(Tabs.Active)"
-        >
+        <q-btn no-caps rounded label="Active" :text-color="Tabs.Active == activeTab ? 'primary' : ''"
+          @click="setActive(Tabs.Active)">
           <!-- <q-badge color="orange" floating transparent v-if="activeCount > 0">
             {{ activeCount }}
           </q-badge> -->
         </q-btn>
-        <q-btn
-          no-caps
-          rounded
-          label="Historic"
-          :text-color="Tabs.Historic == activeTab ? 'primary' : ''"
-          @click="setActive(Tabs.Historic)"
-        >
+        <q-btn no-caps rounded label="Historic" :text-color="Tabs.Historic == activeTab ? 'primary' : ''"
+          @click="setActive(Tabs.Historic)">
           <!-- <q-badge color="orange" floating transparent v-if="historicCount > 0">
             {{ historicCount }}
           </q-badge> -->
         </q-btn>
       </q-btn-group>
     </q-header>
-    <q-drawer
-      v-model="rightDrawerOpen"
-      side="right"
-      overlay
-      behavior="mobile"
-      bordered
-    >
+    <q-drawer v-model="rightDrawerOpen" side="right" overlay behavior="mobile" bordered>
       <items-filter-component />
     </q-drawer>
   </div>
@@ -123,7 +89,7 @@ function setActive(button) {
   emit('update', button);
 }
 
-onMounted(() => {});
+onMounted(() => { });
 </script>
 
 <style scoped>

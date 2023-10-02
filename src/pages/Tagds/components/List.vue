@@ -8,44 +8,20 @@
     </p>
     <div v-else>
       <p class="text-body2 text-bold">{{ listCount }}</p>
-      <q-card
-        v-for="tagd in tagds"
-        :key="tagd.id"
-        flat
-        class="q-mb-sm"
-        @click="onTagdClicked(tagd)"
-      >
+      <q-card v-for="tagd in tagds" :key="tagd.id" flat class="q-mb-sm" @click="onTagdClicked(tagd)">
         <q-card-section horizontal>
           <q-card-section class="col-4 flex flex-center no-margin no-padding">
-            <q-img
-              v-if="tagd.item.images.length > 0"
-              class="rounded-borders"
-              :src="tagd.item.images[0].thumbnail"
-            />
+            <q-img v-if="tagd.item.images.length > 0" class="rounded-borders" :src="tagd.item.images[0].thumbnail" />
             <div v-else class="">No images</div>
-            <q-icon
-              name="sell"
-              class="absolute-top-left circle-icon bg-positive"
-              size="xs"
-              color="white"
-              v-if="tagd.isAvailableForResale && !tagd.auctions"
-            />
-            <q-icon
-              name="sell"
-              class="absolute-top-left circle-icon bg-available"
-              size="xs"
-              color="white"
-              v-if="tagd.auctions"
-            />
+            <q-icon name="sell" class="absolute-top-left circle-icon bg-positive" size="xs" color="white"
+              v-if="tagd.isAvailableForResale && !tagd.auctions" />
+            <q-icon name="sell" class="absolute-top-left circle-icon bg-available" size="xs" color="white"
+              v-if="tagd.auctions" />
           </q-card-section>
           <q-card-section>
             <div class="text-caption">{{ tagd.item.name }}</div>
-            <div
-              class="text-subtitle2 ellipsis-3 min-height"
-              v-html="
-                tagd.item.description.replace(/(?:\r\n|\r|\n)/g, '<br />')
-              "
-            ></div>
+            <div class="text-subtitle2 ellipsis-3 min-height" v-html="tagd.item.description.replace(/(?:\r\n|\r|\n)/g, '<br />')
+              "></div>
             <div class="text-caption text-bold q-mt-sm">{{ tagd.slug }}</div>
             <div class="text-caption">
               {{ Object.values(tagd.item.properties).join(' / ') }}
@@ -89,9 +65,11 @@ function onTagdClicked(item) {
 .min-height {
   min-height: 4rem;
 }
+
 .description {
   max-width: 200px;
 }
+
 .circle-icon {
   width: 0.1rem;
   height: 0.1rem;

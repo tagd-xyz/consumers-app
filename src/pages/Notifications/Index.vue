@@ -2,12 +2,7 @@
   <div>
     <Header title="Notifications" />
     <q-page-container class="q-pa-md row q-gutter-md">
-      <Notification
-        v-for="notification in list"
-        :key="notification.id"
-        :notification="notification"
-        @read="onRead"
-      >
+      <Notification v-for="notification in list" :key="notification.id" :notification="notification" @read="onRead">
       </Notification>
     </q-page-container>
   </div>

@@ -5,14 +5,8 @@
       To have this item listed by our partners, you must mark the item as
       available for resale.
     </p>
-    <q-btn
-      bordered
-      class="full-width"
-      color="primary"
-      label="Available for resale"
-      :loading="isLoading"
-      @click="onClicked"
-    />
+    <q-btn bordered class="full-width" color="primary" label="Available for resale" :loading="isLoading"
+      @click="onClicked" />
   </div>
 </template>
 

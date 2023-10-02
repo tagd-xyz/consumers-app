@@ -2,14 +2,9 @@
   <div>
     <Header @backClicked="onBackClicked" />
     <div v-if="!isLoading">
-      <Gallery
-        v-if="tagd?.item.images.length > 0"
-        :images="tagd?.item.images"
-        :is-listed-for-resale="tagd.auctions?.length > 0 ?? false"
-        :is-available-for-resale="
-          tagd.isAvailableForResale && 0 == (tagd.auctions?.length ?? 0)
-        "
-      />
+      <Gallery v-if="tagd?.item.images.length > 0" :images="tagd?.item.images"
+        :is-listed-for-resale="tagd.auctions?.length > 0 ?? false" :is-available-for-resale="tagd.isAvailableForResale && 0 == (tagd.auctions?.length ?? 0)
+          " />
 
       <TabChoose :active="Tabs.Item" @tabClick="onTabClicked" />
 

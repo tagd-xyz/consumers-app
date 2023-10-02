@@ -1,57 +1,23 @@
 <template>
   <div class="q-ma-md">
     <h6>Filters</h6>
-    <q-select
-      v-model="order"
-      :options="orderOptions"
-      label="Sort by"
-      @update:model-value="onOrderChange()"
-      options-dense
-    />
-    <q-select
-      v-model="type"
-      :options="typeOptions"
-      multiple
-      label="Filter by Category"
-      @update:model-value="onTypeChange()"
-      :disable="!typeOptions.length"
-      options-dense
-    />
-    <q-select
-      v-model="retailer"
-      :options="retailerOptions"
-      multiple
-      label="Filter by Retailer"
-      @update:model-value="onRetailerChange()"
-      options-dense
-    />
-    <q-select
-      v-model="brand"
-      :options="brandOptions"
-      multiple
-      label="Filter by Brand"
-      @update:model-value="onBrandChange()"
-      options-dense
-    />
+    <q-select v-model="order" :options="orderOptions" label="Sort by" @update:model-value="onOrderChange()"
+      options-dense />
+    <q-select v-model="type" :options="typeOptions" multiple label="Filter by Category"
+      @update:model-value="onTypeChange()" :disable="!typeOptions.length" options-dense />
+    <q-select v-model="retailer" :options="retailerOptions" multiple label="Filter by Retailer"
+      @update:model-value="onRetailerChange()" options-dense />
+    <q-select v-model="brand" :options="brandOptions" multiple label="Filter by Brand"
+      @update:model-value="onBrandChange()" options-dense />
     <q-separator class="q-my-lg" />
 
     <div class="text-subtitle2">Available for resale</div>
-    <q-option-group
-      v-model="currentlyAvailable"
-      :options="resaleOptions"
-      @update:model-value="onAvailableChange()"
-      inline
-      dense
-    />
+    <q-option-group v-model="currentlyAvailable" :options="resaleOptions" @update:model-value="onAvailableChange()" inline
+      dense />
 
     <div class="text-subtitle2 q-mt-md disabled">Listed for resale</div>
-    <q-option-group
-      v-model="currentlyListed"
-      :options="resaleOptions"
-      @update:model-value="onListedChange()"
-      inline
-      dense
-    />
+    <q-option-group v-model="currentlyListed" :options="resaleOptions" @update:model-value="onListedChange()" inline
+      dense />
 
     <!-- <q-separator class="q-my-lg" />
 
@@ -157,11 +123,11 @@ watch(brandsAvailable, () => {
 watch(typesAvailable, () => {
   uiStore.setFilteringTypeOptions(
     typesAvailable.value.map((type) => {
-    return {
-      label: type.name,
-      value: type.id,
-    };
-  }));
+      return {
+        label: type.name,
+        value: type.id,
+      };
+    }));
   type.value = typesAvailable.value.map((type) => {
     return {
       label: type.name,

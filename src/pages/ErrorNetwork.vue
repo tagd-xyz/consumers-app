@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="fullscreen bg-primary text-white text-center q-pa-md flex flex-center"
-  >
+  <div class="fullscreen bg-primary text-white text-center q-pa-md flex flex-center">
     <div>
       <q-icon name="cloud_off" size="xl" style="opacity: 0.4" />
 
@@ -13,14 +11,7 @@
         Our servers are currently down, please wait a few minutes.
       </div>
 
-      <q-btn
-        color="white"
-        text-color="primary"
-        unelevated
-        label="Check"
-        @click="check"
-        :loading="isChecking"
-      />
+      <q-btn color="white" text-color="primary" unelevated label="Check" @click="check" :loading="isChecking" />
     </div>
   </div>
 </template>

@@ -2,12 +2,7 @@
   <div>
     <q-card flat class="q-mb-sm">
       <q-card-section horizontal class="bg-grey-2">
-        <q-img
-          fit="scale-down"
-          class="col-3 q-ma-sm"
-          :src="accessRequest.reseller.logo"
-          alt=""
-        />
+        <q-img fit="scale-down" class="col-3 q-ma-sm" :src="accessRequest.reseller.logo" alt="" />
 
         <q-card-section class="bg-grey-3 full-width">
           <div class="text-bold ellipsis-1">
@@ -18,14 +13,7 @@
               date.formatDate(accessRequest.approvedAt, 'MMMM Do, YYYY hh:mm')
             }}
           </div>
-          <q-btn
-            unelevated
-            class="q-my-sm"
-            size="sm"
-            color="secondary"
-            @click="onRevokeClick"
-            :loading="isRevoking"
-          >
+          <q-btn unelevated class="q-my-sm" size="sm" color="secondary" @click="onRevokeClick" :loading="isRevoking">
             Revoke
           </q-btn>
         </q-card-section>
@@ -47,13 +35,7 @@
 
         <q-card-actions align="right">
           <q-btn flat label="No" color="primary" v-close-popup />
-          <q-btn
-            flat
-            label="Yes, revoke access"
-            color="primary"
-            v-close-popup
-            @click="onConfirmClick"
-          />
+          <q-btn flat label="Yes, revoke access" color="primary" v-close-popup @click="onConfirmClick" />
         </q-card-actions>
       </q-card>
     </q-dialog>

@@ -3,10 +3,7 @@
     <div v-if="isActive">
       <SellEnable v-if="!isAvailableForResale" :tagd="tagd" />
       <SellEnabled v-if="isAvailableForResale && !hasAuctions" :tagd="tagd" />
-      <SellAuctions
-        v-if="isAvailableForResale && hasAuctions"
-        :auctions="tagd.auctions"
-      />
+      <SellAuctions v-if="isAvailableForResale && hasAuctions" :auctions="tagd.auctions" />
     </div>
     <div v-else>
       <p class="text-h6 no-margin">This item is not available to sell</p>

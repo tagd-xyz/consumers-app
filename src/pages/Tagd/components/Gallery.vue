@@ -1,40 +1,17 @@
 <template>
   <div>
-    <q-carousel
-      v-model="slide"
-      transition-prev="slide-right"
-      transition-next="slide-left"
-      animated
-      swipeable
-      :thumbnails="isFullscreen"
-      :navigation="!isFullscreen"
-      :fullscreen="isFullscreen"
-      class="rounded-borders items-gallery"
-      height="20rem"
-    >
-      <q-carousel-slide
-        v-for="image in images"
-        :key="image.id"
-        :name="image.id"
-        class="column no-wrap flex-center"
-        :img-src="image.square"
-        @click="toggleFullscreen"
-      >
-        <q-badge
-          rounded
-          color="primary"
-          class="absolute-top-right q-ma-md q-pa-sm"
-          v-if="!isFullscreen && isListedForResale"
-        >
+    <q-carousel v-model="slide" transition-prev="slide-right" transition-next="slide-left" animated swipeable
+      :thumbnails="isFullscreen" :navigation="!isFullscreen" :fullscreen="isFullscreen"
+      class="rounded-borders items-gallery" height="20rem">
+      <q-carousel-slide v-for="image in images" :key="image.id" :name="image.id" class="column no-wrap flex-center"
+        :img-src="image.square" @click="toggleFullscreen">
+        <q-badge rounded color="primary" class="absolute-top-right q-ma-md q-pa-sm"
+          v-if="!isFullscreen && isListedForResale">
           <q-icon name="sell" class="q-mr-sm" color="white" />
           Listed for resale
         </q-badge>
-        <q-badge
-          rounded
-          color="positive"
-          class="absolute-top-right q-ma-md q-pa-sm"
-          v-if="!isFullscreen && isAvailableForResale"
-        >
+        <q-badge rounded color="positive" class="absolute-top-right q-ma-md q-pa-sm"
+          v-if="!isFullscreen && isAvailableForResale">
           <q-icon name="sell" class="q-mr-sm" color="white" />
           Available for resale
         </q-badge>

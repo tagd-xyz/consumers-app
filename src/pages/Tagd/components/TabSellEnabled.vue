@@ -6,14 +6,7 @@
       request to sell. Once you have approved this, your auctions will appear
       here.
     </p>
-    <q-btn
-      flat
-      class="full-width"
-      color="primary"
-      label="Remove listing"
-      :loading="isLoading"
-      @click="onClicked"
-    />
+    <q-btn flat class="full-width" color="primary" label="Remove listing" :loading="isLoading" @click="onClicked" />
   </div>
 </template>
 

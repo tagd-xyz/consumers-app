@@ -18,16 +18,8 @@
 
         <div class="row">
           <div class="col">
-            <q-btn
-              no-caps
-              outline
-              color="primary"
-              label="Sign Out"
-              size="md"
-              text-align="center"
-              class="full-width q-my-sm"
-              @click="showDialog = true"
-            />
+            <q-btn no-caps outline color="primary" label="Sign Out" size="md" text-align="center"
+              class="full-width q-my-sm" @click="showDialog = true" />
           </div>
         </div>
       </div>
@@ -48,12 +40,8 @@
           </q-card>
         </div>
         <div v-else>
-          <access-request
-            v-for="accessRequest in accessRequests"
-            :key="accessRequest.id"
-            :accessRequest="accessRequest"
-            @revoked="accessRequestsStore.fetch()"
-          />
+          <access-request v-for="accessRequest in accessRequests" :key="accessRequest.id" :accessRequest="accessRequest"
+            @revoked="accessRequestsStore.fetch()" />
         </div>
       </div>
     </q-page-container>
@@ -65,13 +53,7 @@
         </q-card-section>
         <q-card-actions align="right">
           <q-btn flat label="No" color="primary" v-close-popup />
-          <q-btn
-            flat
-            label="Yes, sign out"
-            color="primary"
-            v-close-popup
-            @click="onSignOutClicked"
-          />
+          <q-btn flat label="Yes, sign out" color="primary" v-close-popup @click="onSignOutClicked" />
         </q-card-actions>
       </q-card>
     </q-dialog>

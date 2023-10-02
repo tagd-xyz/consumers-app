@@ -13,22 +13,9 @@
         <p class="text-negative" v-if="isRevoked">You revoked this request</p>
       </q-card-section>
       <q-card-actions v-if="areActionsEnabled">
-        <q-btn
-          no-caps
-          color="primary"
-          :loading="isRejecting"
-          :disable="!isRejectEnabled"
-          @click="showDialog = true"
-          >Accept</q-btn
-        >
-        <q-btn
-          no-caps
-          outline
-          :loading="isRejecting"
-          :disable="!isRejectEnabled"
-          @click="onReject"
-          >Reject</q-btn
-        >
+        <q-btn no-caps color="primary" :loading="isRejecting" :disable="!isRejectEnabled"
+          @click="showDialog = true">Accept</q-btn>
+        <q-btn no-caps outline :loading="isRejecting" :disable="!isRejectEnabled" @click="onReject">Reject</q-btn>
       </q-card-actions>
     </q-card>
     <q-dialog v-model="showDialog" persistent>
@@ -47,38 +34,15 @@
         </q-card-section>
 
         <q-card-actions class="justify-center">
-          <q-input
-            square
-            borderless
-            v-model="code"
-            mask="######"
-            class="digits"
-            item-aligned
-            :disable="!isDigitsEnabled"
-            bg-color="grey-3"
-            placeholder=""
-            input-style="text-align: center;letter-spacing:0.2em;"
-          />
+          <q-input square borderless v-model="code" mask="######" class="digits" item-aligned :disable="!isDigitsEnabled"
+            bg-color="grey-3" placeholder="" input-style="text-align: center;letter-spacing:0.2em;" />
         </q-card-actions>
 
         <q-card-actions align="center">
-          <q-btn
-            v-if="isApproveEnabled || isApproving"
-            no-caps
-            class="full-width q-my-sm"
-            label="Accept"
-            color="primary"
-            :loading="isApproving"
-            @click="onAccept"
-          />
-          <q-btn
-            v-if="!isApproveEnabled && !isApproving"
-            flat
-            no-caps
-            v-close-popup
-            class="full-width q-my-sm"
-            label="Close"
-          />
+          <q-btn v-if="isApproveEnabled || isApproving" no-caps class="full-width q-my-sm" label="Accept" color="primary"
+            :loading="isApproving" @click="onAccept" />
+          <q-btn v-if="!isApproveEnabled && !isApproving" flat no-caps v-close-popup class="full-width q-my-sm"
+            label="Close" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -173,7 +137,7 @@ function setErrorMessage(message) {
 function onReject() {
   accessRequestsStore
     .reject(accessRequestId.value)
-    .then(() => {})
+    .then(() => { })
     .catch(() => {
       setErrorMessage('Something went wrong.');
     })
@@ -217,6 +181,7 @@ onMounted(() => {
 .reseller-logo {
   max-width: 3rem;
 }
+
 .digits {
   font-size: xx-large;
   /* font-family: 'Courier New', Courier, monospace; */

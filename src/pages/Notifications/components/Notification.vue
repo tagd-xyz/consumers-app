@@ -1,16 +1,8 @@
 <template>
-  <NotificationTagCreated
-    v-if="isTagCreatedType"
-    :notification="notification"
-    class="fit"
-    @click="onClick(notification)"
-  />
-  <NotificationAccessRequested
-    v-if="isAccessRequestedType"
-    :notification="notification"
-    class="fit"
-    @click="onClick(notification)"
-  />
+  <NotificationTagCreated v-if="isTagCreatedType" :notification="notification" class="fit"
+    @click="onClick(notification)" />
+  <NotificationAccessRequested v-if="isAccessRequestedType" :notification="notification" class="fit"
+    @click="onClick(notification)" />
 </template>
 
 <script setup>

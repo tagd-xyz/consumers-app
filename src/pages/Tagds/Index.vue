@@ -1,36 +1,18 @@
 <template>
   <div>
-    <Header
-      :is-loading="isLoading"
-      @update="onHeaderUpdate"
-      @search="onHeaderSearch"
-      :inactive-count="listInactive.length"
-      :active-count="listActive.length"
-      :historic-count="listHistoric.length"
-    />
+    <Header :is-loading="isLoading" @update="onHeaderUpdate" @search="onHeaderSearch"
+      :inactive-count="listInactive.length" :active-count="listActive.length" :historic-count="listHistoric.length" />
     <q-tab-panels v-model="activeTab" animated>
       <q-tab-panel :name="Tabs.Inactive">
-        <List
-          :is-loading="isLoading"
-          :tagds="listInactive"
-          @tagdClick="onTagdClicked"
-        />
+        <List :is-loading="isLoading" :tagds="listInactive" @tagdClick="onTagdClicked" />
       </q-tab-panel>
 
       <q-tab-panel :name="Tabs.Active">
-        <List
-          :is-loading="isLoading"
-          :tagds="listActive"
-          @tagdClick="onTagdClicked"
-        />
+        <List :is-loading="isLoading" :tagds="listActive" @tagdClick="onTagdClicked" />
       </q-tab-panel>
 
       <q-tab-panel :name="Tabs.Historic">
-        <List
-          :is-loading="isLoading"
-          :tagds="listHistoric"
-          @tagdClick="onTagdClicked"
-        />
+        <List :is-loading="isLoading" :tagds="listHistoric" @tagdClick="onTagdClicked" />
       </q-tab-panel>
     </q-tab-panels>
   </div>

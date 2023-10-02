@@ -1,14 +1,6 @@
 <template>
   <q-toolbar class="text-primary">
-    <q-btn
-      flat
-      round
-      dense
-      icon="navigate_before"
-      label="Back"
-      no-caps
-      @click="onBackClicked"
-    />
+    <q-btn flat round dense icon="navigate_before" label="Back" no-caps @click="onBackClicked" />
     <q-toolbar-title class="absolute-center text-subtitle2">
       Product details
     </q-toolbar-title>

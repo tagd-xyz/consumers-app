@@ -1,15 +1,7 @@
 <template>
   <span>
-    <img
-      v-if="variant == 'dark'"
-      class="tagd-logo full-width"
-      src="~/assets/logo-white.png"
-    />
-    <img
-      v-if="variant == 'light'"
-      class="tagd-logo full-width"
-      src="~/assets/logo-black.png"
-    />
+    <img v-if="variant == 'dark'" class="tagd-logo full-width" src="~/assets/logo-white.png" />
+    <img v-if="variant == 'light'" class="tagd-logo full-width" src="~/assets/logo-black.png" />
   </span>
 </template>
 

@@ -4,12 +4,7 @@
 
     <q-card flat v-for="auction in auctions" :key="auction.id" class="q-mb-sm">
       <q-card-section horizontal class="bg-grey-2">
-        <q-img
-          fit="scale-down"
-          class="col-3 q-ma-sm"
-          :src="auction?.reseller?.logo"
-          alt=""
-        />
+        <q-img fit="scale-down" class="col-3 q-ma-sm" :src="auction?.reseller?.logo" alt="" />
         <q-card-section class="bg-grey-3 full-width">
           <div class="row">
             <div class="col-1 text-grey">Id</div>
